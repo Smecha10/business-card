@@ -24,11 +24,11 @@
         .card {
             background: white;
             border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            max-width: 400px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 440px;
             width: 100%;
-            padding: 40px;
-            text-align: center;
+            padding: 32px;
+            text-align: left;
             transition: transform 0.3s ease;
         }
 
@@ -36,137 +36,265 @@
             transform: translateY(-5px);
         }
 
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            margin-bottom: 20px;
+        }
+
         .avatar {
-            width: 120px;
-            height: 120px;
+            width: 88px;
+            height: 88px;
             border-radius: 50%;
-            margin: 0 auto 20px;
-            border: 4px solid #667eea;
+            border: 3px solid #667eea;
             object-fit: cover;
+            flex-shrink: 0;
         }
 
         h1 {
             color: #2d3748;
-            font-size: 28px;
-            margin-bottom: 8px;
+            font-size: 24px;
+            margin-bottom: 4px;
         }
 
         .title {
             color: #667eea;
-            font-size: 16px;
+            font-size: 13px;
             font-weight: 600;
-            margin-bottom: 20px;
             text-transform: uppercase;
             letter-spacing: 1px;
+        }
+
+        .location {
+            color: #718096;
+            font-size: 12px;
+            margin-top: 4px;
+        }
+
+        .section-label {
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #a0aec0;
+            margin-bottom: 6px;
+            font-weight: 600;
         }
 
         .bio {
             color: #4a5568;
             line-height: 1.6;
-            margin-bottom: 30px;
-            font-size: 14px;
+            font-size: 13px;
+            margin-bottom: 4px;
         }
 
-        .skills {
+        .divider {
+            height: 1px;
+            background: #e2e8f0;
+            margin: 14px 0;
+        }
+
+        .pill-row {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
-            justify-content: center;
-            margin-bottom: 30px;
+            gap: 6px;
         }
 
-        .skill-tag {
+        .pill {
             background: #edf2f7;
             color: #4a5568;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 12px;
+            padding: 5px 10px;
+            border-radius: 999px;
+            font-size: 11px;
             font-weight: 500;
+        }
+
+        .edu-item,
+        .xp-item {
+            margin-bottom: 10px;
+        }
+
+        .edu-title,
+        .xp-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        .edu-sub,
+        .xp-sub {
+            font-size: 12px;
+            color: #718096;
+        }
+
+        .xp-bullets {
+            margin-top: 3px;
+            font-size: 11px;
+            color: #4a5568;
+            line-height: 1.5;
         }
 
         .links {
             display: flex;
-            gap: 15px;
-            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
         }
 
         .link-btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 45px;
-            height: 45px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             background: #667eea;
             color: white;
             text-decoration: none;
             transition: all 0.3s ease;
-            font-size: 20px;
+            font-size: 14px;
+            font-weight: 700;
         }
 
         .link-btn:hover {
             background: #764ba2;
-            transform: scale(1.1);
+            transform: scale(1.08);
         }
 
-        .divider {
-            height: 1px;
-            background: #e2e8f0;
-            margin: 25px 0;
+        .save-contact-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 6px;
+            padding: 10px 18px;
+            border-radius: 999px;
+            border: none;
+            background: linear-gradient(135deg, #48bb78, #38a169);
+            color: white;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(72,187,120,0.4);
+        }
+
+        .save-contact-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(72,187,120,0.5);
+        }
+
+        .save-contact-btn:active {
+            transform: translateY(0);
+        }
+
+        .save-contact-btn svg {
+            width: 16px;
+            height: 16px;
+            fill: white;
         }
 
         @media (max-width: 480px) {
             .card {
-                padding: 30px 20px;
-            }
-
-            h1 {
-                font-size: 24px;
+                padding: 24px 18px;
             }
         }
     </style>
 </head>
 <body>
     <div class="card">
-        <img src="https://avatars.githubusercontent.com/u/153478320?v=4" alt="Spencer Mecham" class="avatar">
-        
-        <h1>Spencer Mecham</h1>
-        <div class="title">Entrepreneur & Developer</div>
-        
-        <p class="bio">
-            HR graduate turned entrepreneur specializing in AI automation, 
-            full-stack development, and business innovation. Building the future 
-            with code and creativity.
-        </p>
-        
-        <div class="divider"></div>
-        
-        <div class="skills">
-            <span class="skill-tag">AI & Automation</span>
-            <span class="skill-tag">Python</span>
-            <span class="skill-tag">JavaScript</span>
-            <span class="skill-tag">Full-Stack Dev</span>
-            <span class="skill-tag">3D Design</span>
-            <span class="skill-tag">HR Tech</span>
+        <div class="header">
+            <img src="headshot.jpg" alt="Spencer Mecham" class="avatar" onerror="this.src='https://avatars.githubusercontent.com/u/153478320?v=4'">
+            <div>
+                <h1>Spencer Mecham</h1>
+                <div class="title">HR &amp; AI Automation</div>
+                <div class="location">&#128205; Provo, UT &nbsp;&middot;&nbsp; &#127760; Spanish-speaking</div>
+            </div>
         </div>
-        
+
+        <div class="section-label">Profile</div>
+        <p class="bio">
+            HR management graduate blending people strategy with AI-powered automation.
+            Experience cutting hours of manual HR work, closing six figures in sales, and
+            leading consulting projects from discovery to delivery.
+        </p>
+
+        <div class="divider"></div>
+
+        <div class="section-label">Education</div>
+        <div class="edu-item">
+            <div class="edu-title">B.S. Human Resource Management</div>
+            <div class="edu-sub">Brigham Young University &middot; GPA 3.81</div>
+        </div>
+        <div class="edu-item">
+            <div class="edu-title">A.S. Political Science</div>
+            <div class="edu-sub">Snow College &middot; GPA 3.89</div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="section-label">Experience Highlights</div>
+        <div class="xp-item">
+            <div class="xp-title">HR Intern &middot; Pacific Coast Producers</div>
+            <div class="xp-sub">Lodi, CA &middot; May 2025 &ndash; Aug 2025</div>
+            <div class="xp-bullets">
+                Automated HR processes with AI &amp; VBA, saving 10+ hrs/week.<br>
+                Supported pay model redesign to strengthen recruiting competitiveness.
+            </div>
+        </div>
+        <div class="xp-item">
+            <div class="xp-title">Sales Representative &middot; Brooks Pest Control</div>
+            <div class="xp-sub">Portland, OR &middot; Jan 2025 &ndash; Sep 2025</div>
+            <div class="xp-bullets">
+                Closed 180+ sales and generated $130k+ revenue in 3 months.<br>
+                Completed 70+ trainings on objections, discovery &amp; closing.
+            </div>
+        </div>
+        <div class="xp-item">
+            <div class="xp-title">Team Lead &middot; Bank of Utah Capstone</div>
+            <div class="xp-sub">Salt Lake City, UT &middot; Aug 2025 &ndash; Dec 2025</div>
+            <div class="xp-bullets">
+                Led consulting project building a leadership behavior-values alignment tool.<br>
+                Facilitated 20+ strategy &amp; design sessions with stakeholders.
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="section-label">Skills &amp; Tools</div>
+        <div class="pill-row">
+            <span class="pill">AI Automation</span>
+            <span class="pill">API Integration</span>
+            <span class="pill">Self-hosted LLMs</span>
+            <span class="pill">SQL &middot; VBA &middot; R</span>
+            <span class="pill">Python</span>
+            <span class="pill">Team Leadership</span>
+            <span class="pill">Direct Sales</span>
+            <span class="pill">Spanish Fluency</span>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="section-label">Save My Contact</div>
+        <button class="save-contact-btn" onclick="downloadVCard()">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
+            </svg>
+            Add Spencer to Contacts
+        </button>
+
+        <div class="divider"></div>
+
+        <div class="section-label">Links</div>
         <div class="links">
-            <a href="https://github.com/Smecha10" class="link-btn" title="GitHub" target="_blank">
-                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                </svg>
-            </a>
-            <a href="https://linkedin.com/in/spencer-mecham" class="link-btn" title="LinkedIn" target="_blank">
-                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-                </svg>
-            </a>
-            <a href="mailto:contact@spencermecham.com" class="link-btn" title="Email" target="_blank">
-                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M0 3v18h24v-18h-24zm21.518 2l-9.518 7.713-9.518-7.713h19.036zm-19.518 14v-11.817l10 8.104 10-8.104v11.817h-20z"/>
-                </svg>
-            </a>
+            <a href="https://github.com/Smecha10" class="link-btn" title="GitHub" target="_blank">GH</a>
+            <a href="https://linkedin.com/in/spencer-mecham" class="link-btn" title="LinkedIn" target="_blank">in</a>
+            <a href="mailto:spencermecham10@gmail.com" class="link-btn" title="Email" target="_blank">@</a>
         </div>
     </div>
+
+    <script>
+        function downloadVCard() {
+            window.location.href = 'spencer-mecham.vcf';
+        }
+    </script>
 </body>
 </html>
