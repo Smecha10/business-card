@@ -10,71 +10,51 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* ----- Design tokens: CoaPro handbook + SimplyHR light surface ----- */
+        /* ----- Tokens: CoaPro handbook + SimplyHR light surface ----- */
         :root {
-            --navy:        #102A43;
-            --navy-2:      #0D2F52;
-            --navy-3:      #123A63;
-            --blue:        #1769E0;
-            --blue-d:      #1256B8;
-            --blue-sub:    #142C4E;
-            --teal:        #0F9D8A;
-            --teal-d:      #0B7A6B;
-            --sky:         #67C5F1;
-            --amber:       #E6A23C;
-            --bg:          #F7FAFC;
-            --bg-2:        #E6EDF5;
-            --surface:     #FFFFFF;
-            --surface-2:   #F5F8FC;
-            --line:        #E4EBF3;
-            --line-2:      #D6DEEC;
-            --text:        #17212B;
-            --text-2:      #25344A;
-            --muted:       #5E6E82;
-            --muted-2:     #7C8DAF;
-            --on-navy:     #EAF2FB;
-            --on-navy-m:   #8B9FCC;
-            --green:       #22B14C;
-            --r:           12px;
-            --r-lg:        16px;
-            --r-xl:        20px;
-            --sh:          0 14px 40px rgba(10,37,64,.10);
-            --sh-sm:       0 4px 14px rgba(10,37,64,.06);
-            --sh-lg:       0 28px 60px rgba(10,37,64,.14);
-            --font-head:   'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
-            --font-body:   'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+            --navy: #102A43; --blue: #1769E0; --blue-d: #1256B8;
+            --teal: #0F9D8A; --teal-d: #0B7A6B; --sky: #67C5F1; --amber: #E6A23C;
+            --bg: #F7FAFC; --surface: #FFFFFF; --surface-2: #F5F8FC;
+            --line: #E4EBF3; --line-2: #D6DEEC;
+            --text: #17212B; --text-2: #25344A;
+            --muted: #5E6E82; --muted-2: #7C8DAF;
+            --r: 12px; --r-lg: 16px; --r-xl: 20px;
+            --sh-sm: 0 1px 2px rgba(10,37,64,.06);
+            --sh: 0 4px 14px rgba(10,37,64,.08);
+            --sh-lg: 0 14px 40px rgba(10,37,64,.12);
+            --font-head: 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
+            --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
         }
 
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
+        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
         @media (prefers-reduced-motion: reduce) {
             html { scroll-behavior: auto; }
             *, *::before, *::after {
                 animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
                 transition-duration: 0.01ms !important;
             }
         }
-
         body {
             font-family: var(--font-body);
             color: var(--text);
-            background: linear-gradient(180deg, #F7FAFC 0%, #E6EDF5 42%, #F7FAFC 100%);
-            line-height: 1.65;
+            background: var(--bg);
+            line-height: 1.6;
             -webkit-font-smoothing: antialiased;
-            min-height: 100vh;
             overflow-x: hidden;
         }
-
-        .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
-        @media (max-width: 480px) { .wrap { padding: 0 18px; } }
-        h1, h2, h3, h4 { font-family: var(--font-head); line-height: 1.16; letter-spacing: -0.015em; color: var(--navy); }
-        a { color: var(--blue); }
+        a { color: var(--blue); text-decoration: none; }
         a:hover { color: var(--blue-d); }
         img { display: block; max-width: 100%; }
+        h1, h2, h3, h4 { font-family: var(--font-head); line-height: 1.18; letter-spacing: -0.02em; color: var(--navy); font-weight: 700; }
+        ul { margin-left: 1.1em; }
+        li + li { margin-top: 0.25em; }
 
-        /* ----- Top color rail (CoaPro signature) ----- */
-        .rail { display: flex; height: 4px; border-radius: 9999px; overflow: hidden; }
+        .wrap { max-width: 980px; margin: 0 auto; padding: 0 20px; }
+        @media (min-width: 760px) { .wrap { padding: 0 28px; } }
+
+        /* ----- Color rail (CoaPro signature) ----- */
+        .rail { display: flex; height: 3px; }
         .rail > * { flex: 1; }
         .rail > *:nth-child(1) { background: var(--navy); }
         .rail > *:nth-child(2) { background: var(--blue); }
@@ -90,1064 +70,822 @@
             -webkit-backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--line);
         }
-        .nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 68px; }
-        .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--navy); }
+        .nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 56px; }
+        .brand { display: flex; align-items: center; gap: 10px; color: var(--navy); }
         .brand-mark {
-            width: 38px; height: 38px; border-radius: 10px;
+            width: 32px; height: 32px; border-radius: 8px;
             display: grid; place-items: center; font-family: var(--font-head);
-            font-weight: 800; font-size: 15px; color: #fff;
+            font-weight: 800; font-size: 13px; color: #fff;
             background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 60%, var(--teal) 100%);
-            box-shadow: 0 6px 18px rgba(23,105,224,.25);
         }
-        .brand-text { font-family: var(--font-head); font-weight: 700; font-size: 15px; letter-spacing: -0.01em; line-height: 1.1; }
-        .brand-sub { font-size: 11px; color: var(--muted); font-weight: 500; letter-spacing: .03em; }
-        .nav-links { display: flex; gap: 22px; align-items: center; }
+        .brand-text { font-family: var(--font-head); font-weight: 700; font-size: 14px; letter-spacing: -0.01em; }
+        .nav-links { display: none; gap: 18px; }
         .nav-links a {
             font-family: var(--font-head); font-weight: 600; font-size: 13px;
-            color: var(--text-2); text-decoration: none; padding: 6px 0;
+            color: var(--text-2); padding: 6px 0;
         }
         .nav-links a:hover { color: var(--blue); }
-        .nav-cta {
-            background: var(--blue); color: #fff !important;
-            padding: 9px 16px !important; border-radius: 999px; font-size: 13px;
-            box-shadow: 0 8px 20px rgba(23,105,224,.25);
-        }
-        .nav-cta:hover { background: var(--blue-d); transform: translateY(-1px); }
         .menu-toggle {
-            display: none; background: transparent;
-            border: 1px solid var(--line-2); color: var(--navy);
-            padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 13px;
-            font-family: var(--font-head); font-weight: 600;
+            background: transparent; border: 1px solid var(--line-2);
+            color: var(--navy); padding: 7px 12px; border-radius: 8px;
+            cursor: pointer; font-size: 13px; font-family: var(--font-head); font-weight: 600;
+            display: inline-flex; align-items: center; gap: 6px;
         }
-        @media (max-width: 760px) {
-            .nav .wrap { height: 60px; }
-            .brand-sub { display: none; }
-            .nav-links {
-                display: none; position: absolute; top: 100%; left: 0; right: 0;
-                flex-direction: column; align-items: stretch; gap: 0;
-                background: rgba(247, 250, 252, 0.98);
-                border-bottom: 1px solid var(--line);
-                padding: 8px 24px 16px;
-            }
-            .nav-links.open { display: flex; }
-            .nav-links a { padding: 12px 0; border-bottom: 1px solid var(--line); }
-            .nav-links a:last-child { border-bottom: none; }
-            .menu-toggle { display: inline-flex; align-items: center; gap: 6px; }
+        @media (min-width: 760px) {
+            .nav-links { display: flex; align-items: center; }
+            .menu-toggle { display: none; }
         }
+        .nav-panel {
+            display: none;
+            background: rgba(247, 250, 252, 0.98);
+            border-bottom: 1px solid var(--line);
+        }
+        .nav-panel.open { display: block; }
+        .nav-panel .wrap { padding-top: 4px; padding-bottom: 12px; }
+        .nav-panel a {
+            display: block; padding: 12px 0;
+            font-family: var(--font-head); font-weight: 600; font-size: 14px;
+            color: var(--text-2); border-bottom: 1px solid var(--line);
+        }
+        .nav-panel a:last-child { border-bottom: none; color: var(--blue); }
 
         /* ----- Hero ----- */
-        .hero { padding: 56px 0 48px; position: relative; overflow: hidden; }
-        @media (max-width: 760px) { .hero { padding: 36px 0 40px; } }
-        .hero::before {
-            content: ""; position: absolute; inset: 0; pointer-events: none;
-            background: radial-gradient(ellipse 70% 50% at 50% 0%, rgba(23,105,224,0.10) 0%, rgba(15,157,138,0.05) 40%, transparent 70%);
-        }
-        .hero .wrap { position: relative; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 48px; align-items: center; }
-        @media (max-width: 900px) {
-            .hero .wrap { grid-template-columns: 1fr; gap: 28px; }
-            .hero-card { justify-self: stretch; }
-        }
-        .kicker {
-            display: inline-flex; align-items: center; gap: 10px;
-            font-family: var(--font-head); font-size: 12px; font-weight: 700;
-            color: var(--teal-d); background: rgba(15,157,138,0.10);
-            border: 1px solid rgba(15,157,138,0.25);
-            padding: 6px 14px; border-radius: 999px; margin-bottom: 18px;
-            letter-spacing: 0.02em;
-        }
-        .kicker::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--teal); }
+        .hero { padding: 28px 0 24px; }
+        @media (min-width: 760px) { .hero { padding: 56px 0 48px; } }
         .hero h1 {
-            font-size: clamp(1.7rem, 6.4vw, 3.3rem);
-            font-weight: 800; line-height: 1.12; letter-spacing: -0.025em;
-            color: var(--navy); margin-bottom: 16px;
+            font-size: 1.65rem; line-height: 1.18; color: var(--navy);
+            margin-bottom: 12px; letter-spacing: -0.02em;
         }
         .hero h1 .accent { color: var(--blue); }
+        @media (min-width: 760px) {
+            .hero h1 { font-size: clamp(2rem, 4vw, 2.85rem); line-height: 1.12; }
+        }
         .hero-lead {
-            font-size: 1rem; color: var(--muted);
-            max-width: 56ch; margin-bottom: 22px;
+            font-size: 0.98rem; color: var(--muted);
+            margin-bottom: 20px; max-width: 56ch;
         }
-        @media (max-width: 480px) { .hero-lead { font-size: 0.95rem; } }
-        .hero-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
-        .hero-actions-secondary { margin-top: -10px; margin-bottom: 22px; }
-        .btn-link {
-            font-family: var(--font-head); font-weight: 600; font-size: 13.5px;
-            color: var(--muted); text-decoration: none; padding: 6px 2px;
-            border-bottom: 1px solid transparent; transition: color .15s, border-color .15s;
-        }
-        .btn-link:hover { color: var(--blue); border-bottom-color: var(--blue); }
-        .btn {
-            display: inline-flex; align-items: center; gap: 8px;
-            font-family: var(--font-head); font-weight: 600; font-size: 14px;
-            padding: 12px 22px; border-radius: 999px;
-            text-decoration: none; cursor: pointer; transition: transform .15s, box-shadow .15s, background .15s;
-            border: none;
-        }
-        @media (max-width: 380px) {
-            .btn { padding: 11px 18px; font-size: 13.5px; }
-        }
-        .btn-primary { background: var(--blue); color: #fff; box-shadow: 0 10px 26px rgba(23,105,224,.30); }
-        .btn-primary:hover { background: var(--blue-d); transform: translateY(-2px); color: #fff; }
-        .btn-ghost { background: #fff; color: var(--navy); border: 1.5px solid var(--line); }
-        .btn-ghost:hover { border-color: var(--blue); color: var(--blue); transform: translateY(-2px); }
-        .chips { display: flex; flex-wrap: wrap; gap: 8px; }
-        .chip {
-            font-family: var(--font-head); font-size: 12px; font-weight: 600;
-            padding: 6px 12px; border-radius: 999px;
-            background: #fff; border: 1px solid var(--line); color: var(--text-2);
-        }
+        @media (min-width: 760px) { .hero-lead { font-size: 1.05rem; } }
 
-        /* ----- Profile card ----- */
-        .hero-card {
-            width: 320px; max-width: 100%;
-            background: var(--surface);
-            border: 1px solid var(--line); border-radius: var(--r-xl);
-            box-shadow: var(--sh-lg);
-            padding: 28px; text-align: center;
-            position: relative; overflow: hidden;
+        /* ----- CTA buttons (full width on mobile, side-by-side on desktop) ----- */
+        .cta-row { display: grid; grid-template-columns: 1fr; gap: 10px; margin-bottom: 20px; }
+        @media (min-width: 480px) { .cta-row { grid-template-columns: 1fr 1fr; } }
+        @media (min-width: 760px) { .cta-row { grid-template-columns: auto auto; } }
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+            font-family: var(--font-head); font-weight: 600; font-size: 14.5px;
+            padding: 14px 18px; border-radius: 10px; min-height: 48px;
+            text-decoration: none; cursor: pointer; transition: transform .12s, background .12s, border-color .12s;
+            border: 1.5px solid transparent;
         }
-        @media (max-width: 900px) {
-            .hero-card { width: auto; max-width: 360px; margin: 0 auto; }
+        .btn-primary { background: var(--blue); color: #fff; box-shadow: 0 6px 18px rgba(23,105,224,.25); }
+        .btn-primary:hover { background: var(--blue-d); transform: translateY(-1px); color: #fff; }
+        .btn-ghost { background: #fff; color: var(--navy); border-color: var(--line-2); }
+        .btn-ghost:hover { border-color: var(--blue); color: var(--blue); }
+        .email-link {
+            display: inline-block; font-family: var(--font-head); font-weight: 500; font-size: 13.5px;
+            color: var(--muted); margin-top: 2px; margin-bottom: 4px;
         }
-        @media (max-width: 380px) {
-            .hero-card { padding: 22px 18px; }
+        .email-link:hover { color: var(--blue); }
+
+        /* ----- Hero meta strip (location / role / status) ----- */
+        .meta-strip {
+            display: flex; flex-wrap: wrap; gap: 14px 18px;
+            padding: 12px 0; border-top: 1px solid var(--line);
+            font-size: 13px; color: var(--muted);
+            margin-top: 4px;
         }
-        .hero-card::before {
-            content: ""; position: absolute; top: 0; left: 0; right: 0; height: 6px;
-            background: linear-gradient(90deg, var(--navy) 0%, var(--blue) 50%, var(--teal) 100%);
-        }
-        .hero-card img {
-            width: 120px; height: 120px; border-radius: 50%;
-            object-fit: cover; border: 4px solid #fff;
-            box-shadow: 0 0 0 1px var(--line-2), 0 8px 24px rgba(10,37,64,.18);
-            margin: 0 auto 16px;
-        }
-        @media (max-width: 380px) {
-            .hero-card img { width: 104px; height: 104px; }
-        }
-        .hero-card h2 { font-size: 20px; margin-bottom: 4px; }
-        .hero-card .role { font-size: 13px; color: var(--muted); margin-bottom: 18px; }
-        .mini-row {
-            display: flex; justify-content: space-between; align-items: center;
-            font-size: 12.5px; padding: 10px 0;
-            border-top: 1px solid var(--line);
-        }
-        .mini-row strong { font-family: var(--font-head); color: var(--blue); font-weight: 700; }
-        .hero-card .cta-row { margin-top: 16px; display: flex; gap: 8px; }
-        .hero-card .cta-row a {
-            flex: 1; font-size: 12px; padding: 9px 10px;
-            text-align: center; border-radius: 8px; text-decoration: none;
-            font-family: var(--font-head); font-weight: 600;
-        }
+        .meta-strip strong { color: var(--text-2); font-weight: 600; }
 
         /* ----- Sections ----- */
-        section { padding: 56px 0; }
-        @media (max-width: 760px) { section { padding: 40px 0; } }
-        .section-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; margin-bottom: 24px; flex-wrap: wrap; }
-        .section-head h2 { font-size: clamp(1.55rem, 4.4vw, 2.1rem); font-weight: 800; }
-        .section-head p { font-size: 14.5px; color: var(--muted); max-width: 52ch; }
-        @media (max-width: 760px) {
-            .section-head { align-items: flex-start; flex-direction: column; gap: 8px; margin-bottom: 20px; }
-            .section-head p { max-width: 100%; }
-        }
+        section { padding: 36px 0; border-top: 1px solid var(--line); }
+        @media (min-width: 760px) { section { padding: 56px 0; } }
+        .section-head { margin-bottom: 22px; }
         .section-eyebrow {
-            font-family: var(--font-head); font-size: 12px; font-weight: 700;
-            letter-spacing: 0.18em; text-transform: uppercase; color: var(--blue);
-            display: flex; align-items: center; gap: 10px; margin-bottom: 8px;
+            font-family: var(--font-head); font-size: 11px; font-weight: 700;
+            letter-spacing: 0.16em; text-transform: uppercase; color: var(--teal-d);
+            margin-bottom: 6px;
         }
-        .section-eyebrow::after { content: ""; height: 2px; width: 36px; background: linear-gradient(90deg, var(--blue), transparent); border-radius: 2px; }
+        .section-head h2 { font-size: 1.4rem; margin-bottom: 6px; }
+        @media (min-width: 760px) { .section-head h2 { font-size: 1.7rem; } }
+        .section-head p { color: var(--muted); font-size: 14.5px; max-width: 60ch; }
 
-        .reveal { opacity: 0; transform: translateY(16px); transition: opacity .55s ease, transform .55s ease; }
+        .reveal { opacity: 0; transform: translateY(12px); transition: opacity .45s ease, transform .45s ease; }
         .reveal.visible { opacity: 1; transform: translateY(0); }
 
-        .card {
-            background: var(--surface); border: 1px solid var(--line);
-            border-radius: var(--r-lg); padding: 24px;
-            box-shadow: var(--sh-sm);
+        /* ----- Now (current roles, simple rows on phone) ----- */
+        .now-list { display: flex; flex-direction: column; gap: 14px; }
+        @media (min-width: 760px) {
+            .now-list { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
         }
-
-        /* ----- What I'm doing now ----- */
-        .now-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
-        @media (max-width: 760px) { .now-grid { grid-template-columns: 1fr; gap: 14px; } }
-        .now-card {
-            background: var(--surface); border: 1px solid var(--line);
-            border-radius: var(--r-lg); padding: 22px;
-            box-shadow: var(--sh-sm); position: relative;
-            transition: transform .2s, box-shadow .2s, border-color .2s;
+        .now-item {
+            padding: 14px 16px;
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: var(--r);
         }
-        .now-card:hover { transform: translateY(-3px); border-color: var(--line-2); box-shadow: var(--sh); }
-        .now-card .ribbon {
-            position: absolute; top: 0; left: 22px;
-            transform: translateY(-50%);
-            font-family: var(--font-head); font-size: 10px; font-weight: 700;
-            letter-spacing: .08em; text-transform: uppercase;
-            padding: 4px 10px; border-radius: 999px; color: #fff;
+        .now-item .label {
+            font-family: var(--font-head); font-size: 10.5px; font-weight: 700;
+            letter-spacing: 0.1em; text-transform: uppercase;
+            color: var(--blue); margin-bottom: 4px;
         }
-        @media (max-width: 480px) {
-            .now-card { padding: 22px 18px 18px; }
-            .now-card .ribbon { left: 18px; }
-        }
-        .now-card h3 { font-size: 1.1rem; margin-bottom: 8px; }
-        .now-card p { font-size: 14.5px; color: var(--muted); margin-bottom: 12px; }
-        .now-card .meta { font-family: var(--font-head); font-size: 11.5px; color: var(--muted-2); }
-        .ribbon-blue   { background: var(--blue); }
-        .ribbon-teal   { background: var(--teal); }
-        .ribbon-amber  { background: var(--amber); }
-        .ribbon-sky    { background: var(--sky); color: var(--navy); }
+        .now-item h3 { font-size: 1rem; margin-bottom: 4px; }
+        .now-item p { font-size: 13.5px; color: var(--muted); }
 
         /* ----- About ----- */
-        .about-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 20px; }
-        @media (max-width: 800px) { .about-grid { grid-template-columns: 1fr; } }
-        .about-card p { color: var(--text-2); font-size: 15.5px; margin-bottom: 14px; }
-        .about-card p:last-child { margin-bottom: 0; }
-        .stat-row { display: grid; grid-template-columns: 1fr; gap: 12px; }
-        .stat-box {
-            padding: 18px; border-radius: var(--r);
-            background: linear-gradient(180deg, #F5F8FC 0%, #FFFFFF 100%);
-            border: 1px solid var(--line);
+        .about-grid { display: grid; gap: 18px; }
+        @media (min-width: 760px) { .about-grid { grid-template-columns: 1.4fr 1fr; gap: 24px; } }
+        .about-card {
+            padding: 18px; background: var(--surface);
+            border: 1px solid var(--line); border-radius: var(--r-lg);
         }
-        .stat-box .num { font-family: var(--font-head); font-size: 1.5rem; font-weight: 800; color: var(--blue); }
-        .stat-box .lbl { font-size: 13px; color: var(--muted); margin-top: 4px; }
+        .about-card p { font-size: 15px; color: var(--text-2); margin-bottom: 12px; }
+        .about-card p:last-child { margin-bottom: 0; }
+        .stat-box {
+            padding: 18px; background: var(--surface);
+            border: 1px solid var(--line); border-radius: var(--r-lg);
+        }
+        .stat-box .row {
+            display: flex; justify-content: space-between; align-items: baseline;
+            padding: 10px 0; border-top: 1px solid var(--line);
+            font-size: 13.5px;
+        }
+        .stat-box .row:first-child { border-top: none; padding-top: 0; }
+        .stat-box .row strong { font-family: var(--font-head); color: var(--blue); font-weight: 700; }
 
         /* ----- Experience timeline ----- */
-        .timeline { position: relative; padding-left: 24px; }
+        .timeline { position: relative; padding-left: 20px; }
         .timeline::before {
-            content: ""; position: absolute; left: 6px; top: 8px; bottom: 8px;
-            width: 2px; background: linear-gradient(180deg, var(--blue), var(--teal));
-            border-radius: 2px; opacity: 0.6;
+            content: ""; position: absolute; left: 5px; top: 8px; bottom: 8px;
+            width: 2px; background: var(--line-2); border-radius: 2px;
         }
-        @media (max-width: 480px) {
-            .timeline { padding-left: 20px; }
-            .timeline::before { left: 5px; }
-        }
-        .tl-item { position: relative; margin-bottom: 28px; }
+        .tl-item { position: relative; margin-bottom: 24px; }
         .tl-item:last-child { margin-bottom: 0; }
         .tl-item::before {
-            content: ""; position: absolute; left: -22px; top: 8px;
-            width: 12px; height: 12px; border-radius: 50%;
-            background: var(--surface); border: 2.5px solid var(--blue);
+            content: ""; position: absolute; left: -19px; top: 8px;
+            width: 10px; height: 10px; border-radius: 50%;
+            background: var(--surface); border: 2px solid var(--blue);
         }
-        @media (max-width: 480px) { .tl-item::before { left: -18px; } }
         .tl-meta {
-            font-family: var(--font-head); font-size: 12px; font-weight: 600;
-            color: var(--teal-d); margin-bottom: 6px; letter-spacing: 0.02em;
+            font-family: var(--font-head); font-size: 11.5px; font-weight: 600;
+            color: var(--teal-d); margin-bottom: 4px; letter-spacing: 0.02em;
         }
-        .tl-item h3 { font-size: 1.05rem; margin-bottom: 4px; }
-        .tl-item .role { font-size: 14px; color: var(--muted); margin-bottom: 10px; }
-        .tl-item ul { margin-left: 18px; color: var(--text-2); font-size: 14.5px; }
-        .tl-item li { margin-bottom: 6px; }
+        .tl-item h3 { font-size: 1rem; margin-bottom: 3px; }
+        .tl-item .role { font-size: 13.5px; color: var(--muted); margin-bottom: 8px; }
+        .tl-item ul { font-size: 14px; color: var(--text-2); }
         .tl-tag {
-            display: inline-block; font-family: var(--font-head); font-size: 11px; font-weight: 600;
+            display: inline-block; font-family: var(--font-head); font-size: 10.5px; font-weight: 600;
             color: var(--blue); background: rgba(23,105,224,0.10);
-            border: 1px solid rgba(23,105,224,0.20);
-            padding: 3px 8px; border-radius: 6px; margin-left: 6px;
+            padding: 2px 7px; border-radius: 5px; margin-left: 6px;
+            vertical-align: 2px;
         }
 
-        /* ----- Projects (CoaPro + iOS + earlier) ----- */
-        .filter-bar { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
-        .filter-btn {
-            font-family: var(--font-head); font-size: 12.5px; font-weight: 600;
-            padding: 10px 16px; border-radius: 999px; min-height: 40px;
-            border: 1px solid var(--line-2); background: #fff; color: var(--muted);
-            cursor: pointer; transition: all .2s;
+        /* ----- Projects ----- */
+        .filter-bar {
+            display: flex; gap: 8px; overflow-x: auto; padding: 4px 0 12px;
+            margin: 0 -20px 18px; padding-left: 20px; padding-right: 20px;
+            scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
         }
-        @media (max-width: 480px) {
-            .filter-bar { gap: 6px; }
-            .filter-btn { padding: 9px 12px; font-size: 12px; }
+        .filter-bar::-webkit-scrollbar { display: none; }
+        @media (min-width: 760px) {
+            .filter-bar { overflow: visible; flex-wrap: wrap; margin: 0 0 18px; padding: 0; }
+        }
+        .filter-btn {
+            flex: 0 0 auto; scroll-snap-align: start;
+            font-family: var(--font-head); font-size: 12.5px; font-weight: 600;
+            padding: 9px 14px; border-radius: 999px; min-height: 40px;
+            border: 1px solid var(--line-2); background: #fff; color: var(--muted);
+            cursor: pointer; transition: all .15s;
         }
         .filter-btn:hover { color: var(--blue); border-color: var(--blue); }
         .filter-btn.active { background: var(--blue); color: #fff; border-color: var(--blue); }
-        .project-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 18px; }
+        .project-grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
+        @media (min-width: 760px) { .project-grid { grid-template-columns: repeat(2, 1fr); gap: 18px; } }
         .project-card {
             background: var(--surface); border: 1px solid var(--line);
-            border-radius: var(--r-lg); overflow: hidden;
-            display: flex; flex-direction: column;
-            transition: transform .2s, box-shadow .2s, border-color .2s;
+            border-radius: var(--r-lg); padding: 18px;
+            transition: border-color .15s, transform .15s;
             cursor: pointer; text-align: left;
         }
-        .project-card:hover { transform: translateY(-4px); border-color: var(--line-2); box-shadow: var(--sh); }
+        .project-card:hover { border-color: var(--line-2); transform: translateY(-2px); }
         .project-card:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
         .project-card.hidden { display: none; }
-        .project-top { padding: 20px 20px 0; display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
-        .project-icon {
-            width: 44px; height: 44px; border-radius: 12px;
-            display: grid; place-items: center; font-size: 20px;
-            background: var(--surface-2); border: 1px solid var(--line);
-        }
+        .project-card .top { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 8px; }
+        .project-card h3 { font-size: 1rem; margin-bottom: 4px; }
+        .project-card .blurb { font-size: 13.5px; color: var(--muted); line-height: 1.5; margin-bottom: 10px; }
         .status-dot {
-            font-family: var(--font-head); font-size: 10px; font-weight: 700;
-            padding: 4px 8px; border-radius: 6px; text-transform: uppercase; letter-spacing: 0.06em;
+            font-family: var(--font-head); font-size: 9.5px; font-weight: 700;
+            padding: 3px 7px; border-radius: 5px; text-transform: uppercase; letter-spacing: 0.06em;
+            white-space: nowrap;
         }
         .status-live { background: rgba(34,177,76,0.12); color: #1a8a3b; }
         .status-build { background: rgba(230,162,60,0.12); color: #b07a1a; }
-        .status-personal { background: rgba(103,197,241,0.18); color: #1256B8; }
-        .project-body { padding: 14px 20px 20px; flex: 1; }
-        .project-body h3 { font-size: 1.05rem; margin-bottom: 6px; }
-        .project-body .blurb { font-size: 14px; color: var(--muted); line-height: 1.55; margin-bottom: 12px; }
-        .tag-row { display: flex; flex-wrap: wrap; gap: 6px; }
+        .status-personal { background: rgba(103,197,241,0.20); color: #1256B8; }
+        .tag-row { display: flex; flex-wrap: wrap; gap: 5px; }
         .tag {
             font-family: var(--font-head); font-size: 10.5px; font-weight: 600;
-            padding: 3px 8px; border-radius: 6px;
-            background: var(--surface-2); color: var(--muted-2); border: 1px solid var(--line);
+            padding: 2px 7px; border-radius: 5px;
+            background: var(--surface-2); color: var(--muted-2);
         }
         .project-foot {
-            padding: 12px 20px; border-top: 1px solid var(--line);
-            display: flex; align-items: center; justify-content: space-between;
-            font-family: var(--font-head); font-size: 11.5px; color: var(--blue);
+            margin-top: 12px; padding-top: 10px;
+            border-top: 1px solid var(--line);
+            font-family: var(--font-head); font-size: 11.5px;
+            color: var(--blue); display: flex; align-items: center; justify-content: space-between;
         }
-        .project-foot .ph { color: var(--muted-2); }
 
-        /* ----- Project drawer ----- */
+        /* ----- Project drawer (full screen on phone) ----- */
         .drawer-overlay {
             position: fixed; inset: 0; background: rgba(10, 37, 64, 0.45);
             z-index: 200; opacity: 0; pointer-events: none;
-            transition: opacity .3s ease; backdrop-filter: blur(4px);
+            transition: opacity .25s ease; backdrop-filter: blur(3px);
         }
         .drawer-overlay.open { opacity: 1; pointer-events: auto; }
         .drawer {
-            position: fixed; top: 0; right: 0; width: min(480px, 100%);
-            height: 100%; background: var(--surface);
-            border-left: 1px solid var(--line); z-index: 201;
+            position: fixed; top: 0; right: 0;
+            width: 100%; height: 100%;
+            background: var(--surface);
+            z-index: 201;
             transform: translateX(100%);
-            transition: transform .35s cubic-bezier(0.22, 1, 0.36, 1);
+            transition: transform .3s cubic-bezier(0.22, 1, 0.36, 1);
             display: flex; flex-direction: column;
-            box-shadow: -24px 0 80px rgba(10, 37, 64, .25);
+        }
+        @media (min-width: 760px) {
+            .drawer { width: min(480px, 100%); border-left: 1px solid var(--line); }
         }
         .drawer.open { transform: translateX(0); }
         .drawer-head {
-            padding: 22px 24px; border-bottom: 1px solid var(--line);
-            display: flex; align-items: flex-start; justify-content: space-between; gap: 16px;
+            padding: 16px 20px; border-bottom: 1px solid var(--line);
+            display: flex; align-items: center; justify-content: space-between; gap: 12px;
+            flex-shrink: 0;
         }
-        .drawer-head h3 { font-size: 1.2rem; }
+        .drawer-head h3 { font-size: 1.05rem; }
         .drawer-close {
             background: var(--surface-2); border: 1px solid var(--line);
-            color: var(--text); width: 36px; height: 36px; border-radius: 10px;
+            color: var(--text); width: 36px; height: 36px; border-radius: 8px;
             cursor: pointer; font-size: 18px; line-height: 1; flex-shrink: 0;
         }
-        .drawer-body { padding: 22px 24px; overflow-y: auto; flex: 1; }
+        .drawer-body { padding: 20px; overflow-y: auto; flex: 1; }
         .drawer-body p { color: var(--text-2); font-size: 14.5px; margin-bottom: 14px; line-height: 1.6; }
-        .drawer-body ul { margin-left: 18px; color: var(--text-2); font-size: 14.5px; }
+        .drawer-body ul { color: var(--text-2); font-size: 14.5px; }
         .drawer-body li { margin-bottom: 8px; }
         .drawer-actions {
-            padding: 18px 24px; border-top: 1px solid var(--line);
-            display: flex; flex-direction: column; gap: 10px;
+            padding: 14px 20px; border-top: 1px solid var(--line);
+            display: flex; flex-direction: column; gap: 8px; flex-shrink: 0;
         }
         .drawer-actions a { text-align: center; }
 
         /* ----- Education ----- */
-        .edu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; }
-        .edu-card h3 { font-size: 1.05rem; margin-bottom: 6px; }
+        .edu-grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
+        @media (min-width: 760px) { .edu-grid { grid-template-columns: 1fr 1fr; } }
+        .edu-card {
+            padding: 18px; background: var(--surface);
+            border: 1px solid var(--line); border-radius: var(--r-lg);
+        }
+        .edu-card h3 { font-size: 1rem; margin-bottom: 4px; }
         .edu-card .sub {
-            font-size: 12.5px; color: var(--teal-d);
-            margin-bottom: 12px; font-family: var(--font-head); font-weight: 600;
+            font-size: 12px; color: var(--teal-d);
+            margin-bottom: 10px; font-family: var(--font-head); font-weight: 600;
         }
-        .edu-card ul { margin-left: 18px; font-size: 14px; color: var(--text-2); }
-        .edu-card li { margin-bottom: 6px; }
+        .edu-card ul { font-size: 14px; color: var(--text-2); }
 
-        /* ----- Skills ----- */
-        .skills-wrap { display: flex; flex-wrap: wrap; gap: 10px; }
-        .skill-chip {
-            font-family: var(--font-head); font-size: 13px; font-weight: 500;
-            padding: 9px 14px; border-radius: 10px;
-            background: var(--surface); color: var(--text-2);
+        /* ----- Skills (categorized, scannable) ----- */
+        .skill-group { margin-bottom: 16px; }
+        .skill-group:last-child { margin-bottom: 0; }
+        .skill-group .lbl {
+            font-family: var(--font-head); font-size: 11px; font-weight: 700;
+            letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-2);
+            margin-bottom: 8px;
+        }
+        .skill-list {
+            display: flex; flex-wrap: wrap; gap: 6px;
+        }
+        .skill-pill {
+            font-family: var(--font-head); font-size: 12.5px; font-weight: 500;
+            padding: 6px 12px; border-radius: 8px;
+            background: var(--surface-2); color: var(--text-2);
             border: 1px solid var(--line);
-            transition: all .2s;
         }
-        .skill-chip:hover { color: var(--blue); border-color: var(--blue); transform: translateY(-2px); }
 
-        /* ----- Contact ----- */
-        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-        @media (max-width: 700px) { .contact-grid { grid-template-columns: 1fr; } }
+        /* ----- Contact (single list, no copy buttons) ----- */
+        .contact-list {
+            display: flex; flex-direction: column; gap: 1px;
+            background: var(--line); border: 1px solid var(--line);
+            border-radius: var(--r-lg); overflow: hidden;
+        }
         .contact-item {
-            display: flex; align-items: center; gap: 14px;
-            padding: 14px; border-radius: var(--r);
-            border: 1px solid var(--line); background: var(--surface);
+            display: flex; align-items: center; gap: 12px;
+            padding: 14px 16px; background: var(--surface);
         }
-        @media (max-width: 380px) {
-            .contact-item { flex-wrap: wrap; gap: 10px; padding: 14px; }
+        .contact-item .lbl {
+            font-family: var(--font-head); font-size: 10.5px; font-weight: 700;
+            color: var(--muted-2); text-transform: uppercase; letter-spacing: 0.08em;
+            min-width: 80px;
         }
-        .contact-item .lbl { font-size: 11.5px; color: var(--muted-2); text-transform: uppercase; letter-spacing: 0.06em; font-family: var(--font-head); font-weight: 600; }
-        .contact-item a { font-size: 14.5px; color: var(--text-2); text-decoration: none; word-break: break-all; }
+        .contact-item a { font-size: 14.5px; color: var(--text-2); word-break: break-all; }
         .contact-item a:hover { color: var(--blue); }
-        .copy-btn {
-            margin-left: auto; font-family: var(--font-head);
-            font-size: 11px; font-weight: 600; padding: 8px 12px; min-height: 32px;
-            border-radius: 6px; border: 1px solid var(--line-2);
-            background: #fff; color: var(--muted); cursor: pointer;
-        }
-        @media (max-width: 380px) {
-            .copy-btn { margin-left: 0; }
-        }
-        .copy-btn:hover { color: var(--blue); border-color: var(--blue); }
+        .contact-item.vcard { background: var(--surface-2); }
+        .contact-item.vcard a { color: var(--blue); font-weight: 600; }
 
         /* ----- Footer ----- */
-        footer { padding: 32px 0 48px; border-top: 1px solid var(--line); margin-top: 24px; text-align: center; font-size: 13px; color: var(--muted); }
+        footer {
+            padding: 28px 0 40px; border-top: 1px solid var(--line);
+            margin-top: 12px; text-align: center; font-size: 12.5px; color: var(--muted);
+        }
         footer a { color: var(--blue); }
+        footer .rail { max-width: 220px; margin: 0 auto 16px; border-radius: 999px; overflow: hidden; }
     </style>
 </head>
 <body>
-    <div class="wrap" aria-hidden="true" style="padding-top: 0; padding-bottom: 0;">
-        <div class="rail" style="margin: 0 0 0 0;"></div>
+
+<header class="nav">
+    <div class="wrap">
+        <a class="brand" href="#top" aria-label="Spencer G. Mecham — home">
+            <span class="brand-mark" aria-hidden="true">SM</span>
+            <span class="brand-text">Spencer G. Mecham</span>
+        </a>
+        <nav class="nav-links" aria-label="Primary">
+            <a href="#now">Now</a>
+            <a href="#experience">Experience</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </nav>
+        <button type="button" class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="navPanel">
+            <span id="menuLabel">Menu</span>
+        </button>
     </div>
-
-    <header class="nav">
+    <div class="nav-panel" id="navPanel">
         <div class="wrap">
-            <a class="brand" href="#top" aria-label="Spencer G. Mecham — home">
-                <span class="brand-mark" aria-hidden="true">SM</span>
-                <span>
-                    <span class="brand-text">Spencer G. Mecham</span><br>
-                    <span class="brand-sub">People Ops · CoaPro Co-founder · Builder</span>
-                </span>
-            </a>
-            <button type="button" class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="navLinks">Menu</button>
-            <nav class="nav-links" id="navLinks" aria-label="Primary">
-                <a href="#now">Now</a>
-                <a href="#about">About</a>
-                <a href="#experience">Experience</a>
-                <a href="#projects">Projects</a>
-                <a href="#education">Education</a>
-                <a href="#contact">Contact</a>
-                <a class="nav-cta" href="#" id="saveVcard" aria-label="Save contact as vCard">Save vCard</a>
-            </nav>
+            <a href="#now">Now</a>
+            <a href="#experience">Experience</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+            <a href="spencer-mecham.vcf" download>Save contact (.vcf)</a>
         </div>
-    </header>
+    </div>
+</header>
 
-    <main id="top" class="wrap">
-        <section class="hero">
-            <div>
-                <span class="kicker">Provo, Utah · Open to interesting problems</span>
-                <h1>I run <span class="accent">people ops</span> at SimplyHR, co-founded <span class="accent">CoaPro</span>, and ship iPhone apps on the side.</h1>
-                <p class="hero-lead">
-                    HR by trade, builder by night. Fractional people-ops work for small businesses, an AI-coaching product for the workplace, and SwiftUI when there's a problem worth solving. I also do lead sourcing and affiliate outreach for NCTPF, a non-profit.
-                </p>
-                <div class="hero-actions">
-                    <a class="btn btn-primary" href="#" id="saveVcardHero" aria-label="Save Spencer Mecham's contact as a vCard">Save my contact</a>
-                    <a class="btn btn-ghost" href="https://www.linkedin.com/in/spencer-mecham-4630652aa" target="_blank" rel="noopener" aria-label="Open Spencer Mecham's LinkedIn profile in a new tab">Add me on LinkedIn</a>
-                </div>
-                <div class="hero-actions hero-actions-secondary">
-                    <a class="btn-link" href="mailto:spencer@simplyhrconsulting.com">or email me</a>
-                </div>
-                <div class="chips" aria-label="What I'm working on">
-                    <span class="chip">SimplyHR Consulting</span>
-                    <span class="chip">CoaPro</span>
-                    <span class="chip">iOS apps</span>
-                    <span class="chip">NCTPF (non-profit)</span>
-                </div>
-            </div>
+<div class="rail" aria-hidden="true"></div>
 
-            <aside class="hero-card" aria-label="Quick profile">
-                <img src="Spencer%20Head%20Shot.jpg" alt="Spencer G. Mecham" width="120" height="120" onerror="this.src='https://avatars.githubusercontent.com/u/153478320?v=4'">
-                <h2>Spencer G. Mecham</h2>
-                <p class="role">People Operations Consultant · CoaPro Co-founder</p>
-                <div class="mini-row"><span>Based in</span><strong>Provo, UT</strong></div>
-                <div class="mini-row"><span>Education</span><strong>BYU · HR Mgmt</strong></div>
-                <div class="mini-row"><span>Building</span><strong>SwiftUI · Agents</strong></div>
-                <div class="cta-row">
-                    <a class="btn btn-primary" href="mailto:spencer@simplyhrconsulting.com" style="font-size:12px;padding:9px 10px;">Email</a>
-                    <a class="btn btn-ghost" href="https://github.com/Smecha10" target="_blank" rel="noopener" style="font-size:12px;padding:9px 10px;">GitHub</a>
-                </div>
-            </aside>
-        </section>
+<main id="top">
+<div class="wrap">
 
-        <section id="now" class="reveal">
-            <div class="section-head">
-                <div>
-                    <p class="section-eyebrow">What I'm doing now</p>
-                    <h2>Four things, in plain language</h2>
-                </div>
-                <p>These are the roles I'm actively in. The rest of the page is the resume behind them.</p>
-            </div>
-            <div class="now-grid">
-                <article class="now-card">
-                    <span class="ribbon ribbon-blue">Role</span>
-                    <h3>People Operations Consultant — SimplyHR Consulting</h3>
-                    <p>Fractional HR for small businesses in the trades. Handbooks, comp design, recruiting, the work that doesn't fit a part-time hire. Pest control, auto, field service — blue-collar books that need a real partner, not a binder.</p>
-                    <p class="meta">Current · since graduating BYU in Dec 2025</p>
-                </article>
-                <article class="now-card">
-                    <span class="ribbon ribbon-teal">Founder</span>
-                    <h3>Co-founder — CoaPro</h3>
-                    <p>AI-coaching and policy enforcement for the workplace. CoaPro puts your AI-use policy in the browser, in the moment, and turns what people are doing with ChatGPT / Claude / Copilot into weekly coaching instead of a surveillance report.</p>
-                    <p class="meta">Live at coapro.org · shipping from this PC</p>
-                </article>
-                <article class="now-card">
-                    <span class="ribbon ribbon-amber">Outreach</span>
-                    <h3>Lead sourcing &amp; affiliate outreach — NCTPF (non-profit)</h3>
-                    <p>Finding schools and organizations worth talking to, writing the kind of outreach that doesn't get filtered out, and getting affiliate meetings on the calendar. Deliverable-first, not blast-first.</p>
-                    <p class="meta">Ongoing</p>
-                </article>
-                <article class="now-card">
-                    <span class="ribbon ribbon-sky">Side</span>
-                    <h3>iPhone apps &amp; small tools</h3>
-                    <p>Native SwiftUI when I hit a problem worth solving: a screen-time lock tied to physical NFC tags, a workout + food + Apple Health app, the iPhone client for my Hermes agent fleet. I ship them for myself, learn from them, and sometimes they turn into products.</p>
-                    <p class="meta">Personal · open-source where it makes sense</p>
-                </article>
-            </div>
-        </section>
+<section class="hero">
+    <h1>I run <span class="accent">people ops</span> at SimplyHR, co-founded <span class="accent">CoaPro</span>, and ship iPhone apps on the side.</h1>
+    <p class="hero-lead">HR by trade, builder by night. Fractional people-ops work for trades-heavy small businesses, an AI-coaching product for the workplace, and SwiftUI when there's a problem worth solving. I also do lead sourcing and affiliate outreach for NCTPF, a non-profit.</p>
+    <div class="cta-row">
+        <a class="btn btn-primary" href="spencer-mecham.vcf" download id="saveVcardHero">Save my contact</a>
+        <a class="btn btn-ghost" href="https://www.linkedin.com/in/spencer-mecham-shrm-cp-4630652aa" target="_blank" rel="noopener">Add me on LinkedIn</a>
+    </div>
+    <a class="email-link" href="mailto:spencer@simplyhrconsulting.com">or email me →</a>
+    <div class="meta-strip">
+        <span><strong>Provo, UT</strong></span>
+        <span><strong>BYU</strong> · HR Mgmt</span>
+        <span><strong>CoaPro</strong> · Live</span>
+    </div>
+</section>
 
-        <section id="about" class="reveal">
-            <div class="section-head">
-                <div>
-                    <p class="section-eyebrow">About</p>
-                    <h2>Operator in HR, builder everywhere else</h2>
-                </div>
-                <p>I do the consulting work because it pays and the building work because I can't stop. The two inform each other — half of what I build for clients started as something I needed in my own company first.</p>
-            </div>
-            <div class="about-grid">
-                <div class="card about-card">
-                    <p>
-                        I work with small-business owners who need an HR partner but can't justify a full-time hire. My job is to take the part of running a company that nobody trained for — handbooks, comp structures, employee issues, compliance, the recruiting that eats a week — and turn it into a system someone else can run.
-                    </p>
-                    <p>
-                        On the side, I co-founded CoaPro because the same pattern kept showing up with AI: people were using it whether their employer had a policy or not, and most companies were either banning it (which goes underground) or paying for seats nobody used well. The fix is coaching in the moment and a small data set, not a bigger surveillance stack.
-                    </p>
-                    <p>
-                        I write code in Swift, Python, TypeScript, and whatever else a project needs. I trained four of CoaPro's models on my own GPU, including a small language model that scores prompts against a rubric. Most weekends I'm either outside or shipping something I started on a Tuesday night.
-                    </p>
-                </div>
-                <div class="card stat-row" aria-label="Background in numbers">
-                    <div class="stat-box">
-                        <div class="num">3.81</div>
-                        <div class="lbl">GPA, BYU Marriott School of Business</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="num">2 yrs</div>
-                        <div class="lbl">field leadership, Honduras (LDS mission)</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="num">$137k</div>
-                        <div class="lbl">revenue in three months, Brooks Pest Control (Portland)</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="experience" class="reveal">
-            <div class="section-head">
-                <div>
-                    <p class="section-eyebrow">Experience</p>
-                    <h2>Selected work, in order</h2>
-                </div>
-                <p>The earlier stuff stays because it shaped how I work now. The current roles do the talking for themselves.</p>
-            </div>
-            <div class="card">
-                <div class="timeline">
-                    <article class="tl-item">
-                        <div class="tl-meta">Dec 2025 — Present · Provo, UT <span class="tl-tag">Current</span></div>
-                        <h3>People Operations Consultant — SimplyHR Consulting</h3>
-                        <p class="role">Fractional HR for trades-heavy small businesses</p>
-                        <ul>
-                            <li>Run a fractional HR practice across pest control, auto, and field-service clients — handbooks, compensation design, recruiting, employee relations, compliance.</li>
-                            <li>Built the discovery → proposal → agreement pipeline, client dashboard in SuiteDash, and the lead list that fills the calendar.</li>
-                            <li>Work directly with owners and operators who want their time back and don't want to learn employment law to get it.</li>
-                        </ul>
-                    </article>
-                    <article class="tl-item">
-                        <div class="tl-meta">Aug 2025 — Present · Provo, UT <span class="tl-tag">Current</span></div>
-                        <h3>Co-founder — CoaPro</h3>
-                        <p class="role">AI-coaching and policy enforcement for the workplace</p>
-                        <ul>
-                            <li>Co-founded and ship CoaPro, the AI-coaching platform that enforces an organization's AI-use policy in the browser, in the moment, across ChatGPT, Claude, Copilot, Gemini, Perplexity, and the personal accounts.</li>
-                            <li>Trained four of our models on a single RTX 5070 Ti — Lens (the assessor), Coach (lessons), Compass (policy drafting), and a security reader for PII shapes. Published privately to Hugging Face under the Spencercito account.</li>
-                            <li>Wrote the Windows endpoint agent in Rust and the macOS prototype in Swift, both of which sit alongside the Chrome/Edge extension as the three enforcement surfaces.</li>
-                        </ul>
-                    </article>
-                    <article class="tl-item">
-                        <div class="tl-meta">Aug 2025 — Dec 2025 · Salt Lake City, UT</div>
-                        <h3>Team Lead — Bank of Utah Senior Capstone</h3>
-                        <p class="role">Senior consulting project, Marriott School of Business</p>
-                        <ul>
-                            <li>Led a senior capstone for Bank of Utah designing a leadership resource that helps executives align day-to-day behaviors with stated company values.</li>
-                            <li>Ran 20+ strategy and design sessions across three implementation paths, stakeholder testing, and iteration cycles.</li>
-                        </ul>
-                    </article>
-                    <article class="tl-item">
-                        <div class="tl-meta">May 2025 — Aug 2025 · Lodi, CA</div>
-                        <h3>HR Intern — Pacific Coast Producers</h3>
-                        <p class="role">Automation, labor relations, compensation projects</p>
-                        <ul>
-                            <li>Automated HR processes with AI and VBA. Coworkers got 10+ hours a week back.</li>
-                            <li>Sat in on union arbitration hearings to learn labor-relations practice from the people who do it for a living.</li>
-                            <li>Headed a project that reworked a pay model to make recruiting more competitive in a tight labor market.</li>
-                        </ul>
-                    </article>
-                    <article class="tl-item">
-                        <div class="tl-meta">Jan 2025 — Sep 2025 · Portland, OR</div>
-                        <h3>Sales Representative — Brooks Pest Control</h3>
-                        <p class="role">B2C sales, Portland team</p>
-                        <ul>
-                            <li>Completed 70+ structured sales trainings covering objections, discovery, and closing.</li>
-                            <li>Generated $137,000 in revenue in three months on the Portland team.</li>
-                            <li>Ran 180+ customer conversations, adapting the pitch to fit the person across the door.</li>
-                        </ul>
-                    </article>
-                    <article class="tl-item">
-                        <div class="tl-meta">Jun 2021 — Jun 2023 · Tegucigalpa, Honduras</div>
-                        <h3>Volunteer Representative — The Church of Jesus Christ of Latter-day Saints</h3>
-                        <p class="role">Field leadership, training, operations</p>
-                        <ul>
-                            <li>Supervised 30 volunteers across several cities in western Honduras.</li>
-                            <li>Ran 70+ hour weeks with continuous planning to keep the team efficient.</li>
-                            <li>Gave 4+ oral presentations a week on skills that mattered in the field.</li>
-                        </ul>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <section id="projects" class="reveal">
-            <div class="section-head">
-                <div>
-                    <p class="section-eyebrow">Projects</p>
-                    <h2>What I've actually built</h2>
-                </div>
-                <p>CoaPro is the main thing. Everything else is either something I use every day, a tool that turned into a product, or an experiment I'm still learning from.</p>
-            </div>
-            <div class="filter-bar" role="tablist" aria-label="Filter projects">
-                <button type="button" class="filter-btn active" data-filter="all" role="tab" aria-selected="true">All</button>
-                <button type="button" class="filter-btn" data-filter="product" role="tab" aria-selected="false">Product</button>
-                <button type="button" class="filter-btn" data-filter="ai" role="tab" aria-selected="false">AI &amp; Agents</button>
-                <button type="button" class="filter-btn" data-filter="ios" role="tab" aria-selected="false">iOS</button>
-                <button type="button" class="filter-btn" data-filter="tools" role="tab" aria-selected="false">Tools</button>
-            </div>
-            <div class="project-grid" id="projectGrid"></div>
-        </section>
-
-        <section id="education" class="reveal">
-            <div class="section-head">
-                <div>
-                    <p class="section-eyebrow">Education</p>
-                    <h2>Two degrees, one focus</h2>
-                </div>
-                <p>HR management with enough analytics, finance, and systems coursework to actually use the data.</p>
-            </div>
-            <div class="edu-grid">
-                <div class="card edu-card">
-                    <h3>Brigham Young University — Marriott School of Business</h3>
-                    <p class="sub">Provo, UT · Bachelor's, Human Resource Management · 2024 — 2025</p>
-                    <ul>
-                        <li>GPA 3.81 / 4.00 · ACT 28 / 36</li>
-                        <li>Analytics-oriented IS coursework (SQL, VBA, R)</li>
-                        <li>Finance and accounting literacy: reading financial statements, balance sheets, income statements</li>
-                        <li>Organizational behavior frameworks applied in team settings</li>
-                        <li>AI automation in business; APIs and self-hosted LLMs</li>
-                    </ul>
-                </div>
-                <div class="card edu-card">
-                    <h3>Snow College</h3>
-                    <p class="sub">Associate degree, Political Science</p>
-                    <ul>
-                        <li>Cumulative GPA 3.89 / 4.00</li>
-                        <li>Political psychology and persuasive communication</li>
-                        <li>Oral debate and structured argumentation</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <section id="skills" class="reveal">
-            <div class="section-head">
-                <div>
-                    <p class="section-eyebrow">Skills &amp; tools</p>
-                    <h2>What I reach for</h2>
-                </div>
-                <p>The things I actually use in client work, in CoaPro, and on the side. Spanish fluency is in here because it's a working language for me, not a line item.</p>
-            </div>
-            <div class="card">
-                <div class="skills-wrap" id="skillChips"></div>
-            </div>
-        </section>
-
-        <section id="contact" class="reveal">
-            <div class="section-head">
-                <div>
-                    <p class="section-eyebrow">Contact</p>
-                    <h2>Get in touch</h2>
-                </div>
-                <p>Email is best. Phone for time-sensitive HR or CoaPro work.</p>
-            </div>
-            <div class="contact-grid">
-                <div class="contact-item">
-                    <div>
-                        <div class="lbl">Work email</div>
-                        <a href="mailto:spencer@simplyhrconsulting.com">spencer@simplyhrconsulting.com</a>
-                    </div>
-                    <button type="button" class="copy-btn" data-copy="spencer@simplyhrconsulting.com" aria-label="Copy work email">Copy</button>
-                </div>
-                <div class="contact-item">
-                    <div>
-                        <div class="lbl">Direct</div>
-                        <a href="mailto:smecham2000@gmail.com">smecham2000@gmail.com</a>
-                    </div>
-                    <button type="button" class="copy-btn" data-copy="smecham2000@gmail.com" aria-label="Copy direct email">Copy</button>
-                </div>
-                <div class="contact-item">
-                    <div>
-                        <div class="lbl">Phone</div>
-                        <a href="tel:+15053667437">(505) 366-7437</a>
-                    </div>
-                </div>
-                <div class="contact-item">
-                    <div>
-                        <div class="lbl">LinkedIn</div>
-                        <a href="https://www.linkedin.com/in/spencer-mecham-4630652aa" target="_blank" rel="noopener">linkedin.com/in/spencer-mecham-4630652aa</a>
-                    </div>
-                </div>
-                <div class="contact-item">
-                    <div>
-                        <div class="lbl">GitHub</div>
-                        <a href="https://github.com/Smecha10" target="_blank" rel="noopener">github.com/Smecha10</a>
-                    </div>
-                </div>
-                <div class="contact-item">
-                    <div>
-                        <div class="lbl">CoaPro</div>
-                        <a href="https://coapro.org" target="_blank" rel="noopener">coapro.org</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <footer>
-            <div class="rail" style="max-width: 360px; margin: 0 auto 18px;"></div>
-            <p>
-                <a href="spencer-mecham.vcf" download>Download vCard</a>
-                · <a href="https://github.com/Smecha10/business-card" target="_blank" rel="noopener">View this site on GitHub</a>
-            </p>
-        </footer>
-    </main>
-
-    <div class="drawer-overlay" id="drawerOverlay" aria-hidden="true"></div>
-    <aside class="drawer" id="drawer" aria-hidden="true" aria-labelledby="drawerTitle">
-        <div class="drawer-head">
-            <h3 id="drawerTitle">Project</h3>
-            <button type="button" class="drawer-close" id="drawerClose" aria-label="Close details">&times;</button>
+<section id="now" class="reveal">
+    <div class="section-head">
+        <p class="section-eyebrow">Now</p>
+        <h2>What I'm doing</h2>
+    </div>
+    <div class="now-list">
+        <div class="now-item">
+            <p class="label">Role</p>
+            <h3>People Operations Consultant, SimplyHR</h3>
+            <p>Fractional HR for trades-heavy small businesses — handbooks, comp, recruiting, compliance. Pest control, auto, field service.</p>
         </div>
-        <div class="drawer-body" id="drawerBody"></div>
-        <div class="drawer-actions" id="drawerActions"></div>
-    </aside>
+        <div class="now-item">
+            <p class="label">Founder</p>
+            <h3>Co-founder, CoaPro</h3>
+            <p>AI-coaching and policy enforcement for the workplace. Live at coapro.org.</p>
+        </div>
+        <div class="now-item">
+            <p class="label">Outreach</p>
+            <h3>Lead sourcing, NCTPF (non-profit)</h3>
+            <p>Finding schools and organizations for affiliate meetings. Deliverable-first outreach.</p>
+        </div>
+        <div class="now-item">
+            <p class="label">Side</p>
+            <h3>iPhone apps &amp; small tools</h3>
+            <p>SwiftUI when I hit a problem worth solving: a screen-time lock, a workout app, the iPhone client for my agent fleet.</p>
+        </div>
+    </div>
+</section>
 
-    <script>
-    (function () {
-        var projects = [
-            {
-                id: "coapro",
-                title: "CoaPro",
-                blurb: "AI-coaching and policy enforcement for the workplace. Browser, endpoint, and a small set of trained models.",
-                icon: "\uD83D\uDEE1\uFE0F",
-                status: "live",
-                statusLabel: "Live",
-                tags: ["Swift", "Rust", "TypeScript", "Python"],
-                categories: ["product", "ai"],
-                detail: [
-                    "CoaPro enforces an organization's AI-use policy in the browser, in the moment, across ChatGPT, Claude, Copilot, Gemini, Perplexity, and the personal accounts. It scores prompts, gives inline coaching, and produces a weekly per-employee digest instead of a surveillance report.",
-                    "I co-founded the company, write the backend, train the models, and own the endpoint agents. The Chrome and Edge extension is live, the Windows agent is in Rust and the most active component, and the macOS prototype is Swift. Models — Lens, Coach, Compass, and a security reader — are trained locally on a single RTX 5070 Ti and published privately to Hugging Face.",
-                    "Live at coapro.org. Marketing, console, and backend all ship from the same monorepo."
-                ],
-                link: "https://coapro.org",
-                linkLabel: "Open coapro.org"
-            },
-            {
-                id: "taglock",
-                title: "TagLock",
-                blurb: "iPhone app that makes your phone hard to use. NFC tag or QR code to unlock — that's it.",
-                icon: "\uD83D\uDD12",
-                status: "personal",
-                statusLabel: "Personal",
-                tags: ["Swift", "SwiftUI", "Family Controls", "NFC"],
-                categories: ["ios", "product"],
-                detail: [
-                    "A personal-use iPhone app that uses Apple's Screen Time (Family Controls) APIs to shield the apps, categories, and websites you pick. The only way out of a lock is physically tapping a paired NFC tag or scanning a paired QR code — with optional minimum lock times, cooldowns, and a strict mode that disables overrides.",
-                    "No accounts, no cloud, no analytics, no emergency unlock. If every paired tag is gone, the only path out of an active lock is to back up the iPhone and erase it. Built in SwiftUI with SwiftData persistence, an MVVM core, and a DeviceActivity monitor extension.",
-                    "Open source on my GitHub. Not in the App Store — it's a personal tool, not a product."
-                ],
-                link: "https://github.com/Smecha10",
-                linkLabel: "GitHub profile"
-            },
-            {
-                id: "workout",
-                title: "Workout",
-                blurb: "Workouts, food, and Apple Health, in one SwiftUI app. The one I actually use every day.",
-                icon: "\uD83D\uDCAA",
-                status: "personal",
-                statusLabel: "Personal",
-                tags: ["Swift", "SwiftUI", "HealthKit", "EventKit"],
-                categories: ["ios", "product"],
-                detail: [
-                    "Workouts, food photos, and Apple Health in one SwiftUI app. Reads weight and body metrics from Health, saves workouts back, and lays them out on a calendar that syncs to a Workouts calendar in EventKit. Camera is wired up for snapping food photos for calorie tracking.",
-                    "Targets iOS 17. The reason it exists: I wanted an app that did the things I actually do without three subscriptions. Ships as a personal tool, not an App Store release."
-                ],
-                link: "https://github.com/Smecha10",
-                linkLabel: "GitHub profile"
-            },
-            {
-                id: "fleet-console",
-                title: "Fleet Console iOS",
-                blurb: "Native iPhone client for my Hermes agent fleet. Replaces the Telegram front door.",
-                icon: "\uD83D\uDCF1",
-                status: "build",
-                statusLabel: "Active build",
-                tags: ["Swift", "SwiftUI", "Tailscale", "REST"],
-                categories: ["ios", "ai"],
-                detail: [
-                    "Native SwiftUI client for the Fleet Console, the web and iPhone app I use to talk to and manage all of my Hermes agents — CoaPro's workers, my HR consultants, the trading bots, the marketing agents. The app is the replacement for the Telegram-based routing layer I used to use.",
-                    "Reads from the same Fleet API the web app does. Build is generated with XcodeGen and signed against my Apple Developer team. The iPhone 17 Pro Max simulator screenshots are real — that's the device it runs on day to day."
-                ],
-                link: "https://github.com/Smecha10",
-                linkLabel: "GitHub profile"
-            },
-            {
-                id: "ownnotes-ios",
-                title: "OwnNotes iOS",
-                blurb: "Native iPhone recorder for the OwnNotes PC server. Records, syncs, deletes on confirm.",
-                icon: "\uD83C\uDF99\uFE0F",
-                status: "personal",
-                statusLabel: "Personal",
-                tags: ["Swift", "AVFoundation", "Tailscale"],
-                categories: ["ios"],
-                detail: [
-                    "Native iOS companion for the OwnNotes PC server, my voice-notes app. Records with AVAudioRecorder, stores locally in SQLite, and auto-uploads to the PC over Tailscale. The recording is deleted from the phone only after the server confirms it received the file.",
-                    "Reason it exists: the PWA's MediaRecorder gets suspended when the iOS tab loses focus, and AVAudioRecorder writes atomically so a kill mid-record still leaves a valid file. Background recording via the audio background mode entitlement."
-                ],
-                link: "https://github.com/Smecha10/own-notes",
-                linkLabel: "Open the repo"
-            },
-            {
-                id: "scraping",
-                title: "HR Lead-Scraping Agent",
-                blurb: "Weekly research across ~50 HR-related sites, scored and turned into consulting leads.",
-                icon: "\uD83D\uDD0E",
-                status: "build",
-                statusLabel: "Active build",
-                tags: ["Python", "LLM", "Scraping"],
-                categories: ["ai", "tools"],
-                detail: [
-                    "Automated research agent that walks a fixed list of HR-related sites weekly, extracts the signals that look like consulting opportunities, and runs them through an LLM for a lead-quality score and a one-line summary. The output is a ranked list of outreach candidates, not a firehose.",
-                    "Pairs retrieval with LLM summarization and a quality check that filters noisy or duplicate entries before anything lands in the lead pipeline."
-                ],
-                link: "https://github.com/Smecha10/simplyhr-scraping-tool",
-                linkLabel: "Open the repo"
-            },
-            {
-                id: "agent-windows",
-                title: "CoaPro Windows Agent",
-                blurb: "Rust endpoint agent that intercepts native AI apps and AI-first browsers at the keyboard level.",
-                icon: "\uD83E\uDE9F",
-                status: "build",
-                statusLabel: "In production",
-                tags: ["Rust", "Win32", "DPAPI"],
-                categories: ["ai", "tools"],
-                detail: [
-                    "The Windows enforcement surface for CoaPro. A keyboard hook plus UI Automation composer read on native AI apps (ChatGPT desktop, Claude desktop), AI-first browsers, AI tabs in regular browsers, and AI CLIs in terminals. Judges send-button clicks locally, blocks the keyboard send when policy says to, and shows an on-screen notice with a presence badge.",
-                    "DPAPI-encrypted disk spool for the offline queue, password sign-in with refresh, autostart. Reports to the CoaPro backend over /api/evaluate then /api/events/ingest. Most active component in the monorepo — 30+ merged PRs."
-                ],
-                link: "https://coapro.org",
-                linkLabel: "Open coapro.org"
-            },
-            {
-                id: "terminal-hub",
-                title: "Terminal Hub",
-                blurb: "Mobile-friendly web UI for persistent tmux-backed terminals. Swipe-to-scroll, on-screen keys.",
-                icon: "\u2328\uFE0F",
-                status: "live",
-                statusLabel: "Live",
-                tags: ["Python", "ttyd", "tmux"],
-                categories: ["tools"],
-                detail: [
-                    "Tabbed, mobile-friendly web UI for persistent tmux-backed terminals, built on ttyd plus a small Python front end. Swipe-to-scroll, on-screen keys, and SSH targets so a phone becomes a usable shell.",
-                    "Runs on the Pi and serves the rest of the fleet. The reason it exists: I was tired of fighting with mobile SSH clients every time I wanted to check a worker log from the road."
-                ],
-                link: "https://github.com/Smecha10/terminal-hub",
-                linkLabel: "Open the repo"
-            }
-        ];
+<section id="about" class="reveal">
+    <div class="section-head">
+        <p class="section-eyebrow">About</p>
+        <h2>Operator in HR, builder everywhere else</h2>
+    </div>
+    <div class="about-grid">
+        <div class="about-card">
+            <p>I work with small-business owners who need an HR partner but can't justify a full-time hire. My job is to take the part of running a company that nobody trained for — handbooks, comp, employee issues, compliance, recruiting — and turn it into a system someone else can run.</p>
+            <p>On the side I co-founded CoaPro because the same pattern kept showing up with AI: people use it whether their employer has a policy or not, and most companies either ban it (it goes underground) or pay for seats nobody uses well. Coaching in the moment and a small data set, not a bigger surveillance stack.</p>
+            <p>I write Swift, Python, TypeScript, and whatever a project needs. I trained four of CoaPro's models on my own GPU, including a small language model that scores prompts against a rubric.</p>
+        </div>
+        <div class="stat-box">
+            <div class="row"><span>BYU GPA</span><strong>3.81</strong></div>
+            <div class="row"><span>Honduras mission</span><strong>2 yrs</strong></div>
+            <div class="row"><span>Brooks revenue (3 mo)</span><strong>$137k</strong></div>
+        </div>
+    </div>
+</section>
 
-        var skills = [
-            "Swift / SwiftUI",
-            "Rust (CoaPro Windows agent)",
-            "TypeScript / Next.js",
-            "Python",
-            "SQL · VBA · R",
-            "HRIS & process design",
-            "Handbook + comp design",
-            "Recruiting (LinkedIn Recruiter)",
-            "Self-hosted LLMs (Ollama)",
-            "LoRA training (SmolLM2, ettin)",
-            "FastAPI · Supabase",
-            "Rust keyboard hooks / Win32",
-            "Tailscale networking",
-            "API integration",
-            "Spanish (fluent)",
-            "Public speaking & training"
-        ];
+<section id="experience" class="reveal">
+    <div class="section-head">
+        <p class="section-eyebrow">Experience</p>
+        <h2>Where I've worked</h2>
+    </div>
+    <div class="timeline">
+        <article class="tl-item">
+            <div class="tl-meta">Dec 2025 — Now · Provo, UT <span class="tl-tag">Current</span></div>
+            <h3>People Operations Consultant — SimplyHR Consulting</h3>
+            <p class="role">Fractional HR for trades-heavy small businesses</p>
+            <ul>
+                <li>Run the HR practice across pest control, auto, and field-service clients: handbooks, comp design, recruiting, employee relations, compliance.</li>
+                <li>Built the discovery → proposal → agreement pipeline and the SuiteDash client dashboard that fills the calendar.</li>
+            </ul>
+        </article>
+        <article class="tl-item">
+            <div class="tl-meta">Aug 2025 — Now · Provo, UT <span class="tl-tag">Current</span></div>
+            <h3>Co-founder — CoaPro</h3>
+            <p class="role">AI-coaching and policy enforcement for the workplace</p>
+            <ul>
+                <li>Ship CoaPro: the policy lives in the browser, in the moment, across ChatGPT, Claude, Copilot, Gemini, Perplexity, and the personal accounts.</li>
+                <li>Trained four of our models on a single RTX 5070 Ti — Lens, Coach, Compass, and a security reader. Published privately to Hugging Face.</li>
+                <li>Wrote the Windows endpoint agent in Rust and the macOS prototype in Swift.</li>
+            </ul>
+        </article>
+        <article class="tl-item">
+            <div class="tl-meta">Aug 2025 — Dec 2025 · Salt Lake City, UT</div>
+            <h3>Team Lead — Bank of Utah Capstone</h3>
+            <p class="role">Senior consulting project, BYU Marriott</p>
+            <ul>
+                <li>Led a senior capstone designing a leadership resource that aligns day-to-day behaviors with stated company values.</li>
+                <li>Ran 20+ strategy and design sessions across three implementation paths.</li>
+            </ul>
+        </article>
+        <article class="tl-item">
+            <div class="tl-meta">May 2025 — Aug 2025 · Lodi, CA</div>
+            <h3>HR Intern — Pacific Coast Producers</h3>
+            <p class="role">Automation, labor relations, comp</p>
+            <ul>
+                <li>Automated HR processes with AI and VBA. Coworkers got 10+ hours a week back.</li>
+                <li>Sat in on union arbitration hearings.</li>
+                <li>Reworked a pay model for recruiting competitiveness.</li>
+            </ul>
+        </article>
+        <article class="tl-item">
+            <div class="tl-meta">Jan 2025 — Sep 2025 · Portland, OR</div>
+            <h3>Sales Representative — Brooks Pest Control</h3>
+            <p class="role">B2C sales, Portland team</p>
+            <ul>
+                <li>70+ structured sales trainings; $137k revenue in three months; 180+ customer conversations.</li>
+            </ul>
+        </article>
+        <article class="tl-item">
+            <div class="tl-meta">Jun 2021 — Jun 2023 · Tegucigalpa, Honduras</div>
+            <h3>Volunteer Representative — The Church of Jesus Christ of Latter-day Saints</h3>
+            <p class="role">Field leadership, training, operations</p>
+            <ul>
+                <li>Supervised 30 volunteers across western Honduras. 70+ hour weeks. 4+ oral presentations a week.</li>
+            </ul>
+        </article>
+    </div>
+</section>
 
-        var grid = document.getElementById("projectGrid");
-        var drawer = document.getElementById("drawer");
-        var overlay = document.getElementById("drawerOverlay");
-        var drawerTitle = document.getElementById("drawerTitle");
-        var drawerBody = document.getElementById("drawerBody");
-        var drawerActions = document.getElementById("drawerActions");
-        var menuToggle = document.getElementById("menuToggle");
-        var navLinks = document.getElementById("navLinks");
+<section id="projects" class="reveal">
+    <div class="section-head">
+        <p class="section-eyebrow">Projects</p>
+        <h2>What I've actually built</h2>
+        <p>CoaPro is the main thing. The rest is either something I use every day, a tool that turned into a product, or an experiment I'm still learning from.</p>
+    </div>
+    <div class="filter-bar" role="tablist" aria-label="Filter projects">
+        <button type="button" class="filter-btn active" data-filter="all" role="tab" aria-selected="true">All</button>
+        <button type="button" class="filter-btn" data-filter="product" role="tab" aria-selected="false">Product</button>
+        <button type="button" class="filter-btn" data-filter="ai" role="tab" aria-selected="false">AI &amp; agents</button>
+        <button type="button" class="filter-btn" data-filter="ios" role="tab" aria-selected="false">iOS</button>
+        <button type="button" class="filter-btn" data-filter="tools" role="tab" aria-selected="false">Tools</button>
+    </div>
+    <div class="project-grid" id="projectGrid"></div>
+</section>
 
-        function esc(s) {
-            var d = document.createElement("div");
-            d.textContent = s;
-            return d.innerHTML;
+<section id="education" class="reveal">
+    <div class="section-head">
+        <p class="section-eyebrow">Education</p>
+        <h2>Two degrees, one focus</h2>
+    </div>
+    <div class="edu-grid">
+        <div class="edu-card">
+            <h3>Brigham Young University — Marriott School of Business</h3>
+            <p class="sub">Provo, UT · Bachelor's, Human Resource Management · 2024 — 2025</p>
+            <ul>
+                <li>GPA 3.81 / 4.00 · ACT 28 / 36</li>
+                <li>Analytics coursework: SQL, VBA, R</li>
+                <li>Finance and accounting literacy</li>
+                <li>AI automation in business; APIs and self-hosted LLMs</li>
+            </ul>
+        </div>
+        <div class="edu-card">
+            <h3>Snow College</h3>
+            <p class="sub">Associate degree, Political Science</p>
+            <ul>
+                <li>Cumulative GPA 3.89 / 4.00</li>
+                <li>Political psychology and persuasive communication</li>
+                <li>Oral debate and structured argumentation</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<section id="skills" class="reveal">
+    <div class="section-head">
+        <p class="section-eyebrow">Skills</p>
+        <h2>What I reach for</h2>
+    </div>
+    <div id="skillGroups"></div>
+</section>
+
+<section id="contact" class="reveal">
+    <div class="section-head">
+        <p class="section-eyebrow">Contact</p>
+        <h2>Get in touch</h2>
+        <p>Email is best. Phone for time-sensitive HR or CoaPro work.</p>
+    </div>
+    <div class="contact-list">
+        <div class="contact-item"><span class="lbl">Work</span><a href="mailto:spencer@simplyhrconsulting.com">spencer@simplyhrconsulting.com</a></div>
+        <div class="contact-item"><span class="lbl">Direct</span><a href="mailto:smecham2000@gmail.com">smecham2000@gmail.com</a></div>
+        <div class="contact-item"><span class="lbl">Phone</span><a href="tel:+15053667437">(505) 366-7437</a></div>
+        <div class="contact-item"><span class="lbl">LinkedIn</span><a href="https://www.linkedin.com/in/spencer-mecham-shrm-cp-4630652aa" target="_blank" rel="noopener">linkedin.com/in/spencer-mecham-shrm-cp-4630652aa</a></div>
+        <div class="contact-item"><span class="lbl">GitHub</span><a href="https://github.com/Smecha10" target="_blank" rel="noopener">github.com/Smecha10</a></div>
+        <div class="contact-item"><span class="lbl">CoaPro</span><a href="https://coapro.org" target="_blank" rel="noopener">coapro.org</a></div>
+        <div class="contact-item vcard"><span class="lbl">vCard</span><a href="spencer-mecham.vcf" download>Download contact file</a></div>
+    </div>
+</section>
+
+<footer>
+    <div class="rail" aria-hidden="true"></div>
+    <p><a href="https://github.com/Smecha10/business-card" target="_blank" rel="noopener">Source on GitHub</a></p>
+</footer>
+
+</div>
+</main>
+
+<div class="drawer-overlay" id="drawerOverlay" aria-hidden="true"></div>
+<aside class="drawer" id="drawer" aria-hidden="true" aria-labelledby="drawerTitle">
+    <div class="drawer-head">
+        <h3 id="drawerTitle">Project</h3>
+        <button type="button" class="drawer-close" id="drawerClose" aria-label="Close details">&times;</button>
+    </div>
+    <div class="drawer-body" id="drawerBody"></div>
+    <div class="drawer-actions" id="drawerActions"></div>
+</aside>
+
+<script>
+(function () {
+    var projects = [
+        {
+            id: "coapro", title: "CoaPro", status: "live", statusLabel: "Live",
+            blurb: "AI-coaching and policy enforcement for the workplace. Browser, endpoint, and a small set of trained models.",
+            tags: ["Swift", "Rust", "TypeScript", "Python"],
+            categories: ["product", "ai"],
+            detail: [
+                "Enforces an organization's AI-use policy in the browser, in the moment, across ChatGPT, Claude, Copilot, Gemini, Perplexity, and the personal accounts. Scores prompts, gives inline coaching, and produces a weekly per-employee digest instead of a surveillance report.",
+                "I co-founded the company, write the backend, train the models, and own the endpoint agents. The Chrome and Edge extension is live, the Windows agent is in Rust and the most active component, and the macOS prototype is Swift. Models: Lens, Coach, Compass, and a security reader, all trained locally on a single RTX 5070 Ti and published privately to Hugging Face."
+            ],
+            link: "https://coapro.org", linkLabel: "Open coapro.org"
+        },
+        {
+            id: "taglock", title: "TagLock", status: "personal", statusLabel: "Personal",
+            blurb: "iPhone app that makes your phone hard to use. NFC tag or QR code to unlock, that's it.",
+            tags: ["Swift", "SwiftUI", "Family Controls", "NFC"],
+            categories: ["ios", "product"],
+            detail: [
+                "Uses Apple's Screen Time (Family Controls) APIs to shield the apps, categories, and websites you pick. The only way out of a lock is tapping a paired NFC tag or scanning a paired QR code, with optional minimum lock times, cooldowns, and a strict mode that disables overrides.",
+                "No accounts, no cloud, no analytics, no emergency unlock. If every paired tag is gone, the only path out of an active lock is to back up the iPhone and erase it. Built in SwiftUI with SwiftData persistence and a DeviceActivity monitor extension."
+            ],
+            link: "https://github.com/Smecha10", linkLabel: "GitHub profile"
+        },
+        {
+            id: "workout", title: "Workout", status: "personal", statusLabel: "Personal",
+            blurb: "Workouts, food, and Apple Health in one SwiftUI app. The one I actually use every day.",
+            tags: ["Swift", "SwiftUI", "HealthKit", "EventKit"],
+            categories: ["ios", "product"],
+            detail: [
+                "Reads weight and body metrics from Health, saves workouts back, and lays them out on a calendar that syncs to a Workouts calendar in EventKit. Camera is wired up for snapping food photos for calorie tracking. iOS 17."
+            ],
+            link: "https://github.com/Smecha10", linkLabel: "GitHub profile"
+        },
+        {
+            id: "fleet-console", title: "Fleet Console iOS", status: "build", statusLabel: "Active build",
+            blurb: "Native iPhone client for my Hermes agent fleet. Replaces the Telegram front door.",
+            tags: ["Swift", "SwiftUI", "Tailscale", "REST"],
+            categories: ["ios", "ai"],
+            detail: [
+                "Native SwiftUI client for the Fleet Console, the web and iPhone app I use to talk to and manage all of my Hermes agents: CoaPro's workers, HR consultants, trading bots, marketing agents. Replaces the Telegram-based routing layer I used to use.",
+                "Reads from the same Fleet API the web app does. Build is generated with XcodeGen and signed against my Apple Developer team. The iPhone 17 Pro Max simulator screenshots are real; that's the device it runs on day to day."
+            ],
+            link: "https://github.com/Smecha10", linkLabel: "GitHub profile"
+        },
+        {
+            id: "ownnotes-ios", title: "OwnNotes iOS", status: "personal", statusLabel: "Personal",
+            blurb: "Native iPhone recorder for the OwnNotes PC server. Records, syncs, deletes on confirm.",
+            tags: ["Swift", "AVFoundation", "Tailscale"],
+            categories: ["ios"],
+            detail: [
+                "Native iOS companion for the OwnNotes PC server, my voice-notes app. Records with AVAudioRecorder, stores locally in SQLite, and auto-uploads to the PC over Tailscale. The recording is deleted from the phone only after the server confirms it received the file.",
+                "Reason it exists: the PWA's MediaRecorder gets suspended when the iOS tab loses focus, and AVAudioRecorder writes atomically so a kill mid-record still leaves a valid file. Background recording via the audio background mode entitlement."
+            ],
+            link: "https://github.com/Smecha10/own-notes", linkLabel: "Open the repo"
+        },
+        {
+            id: "scraping", title: "HR Lead-Scraping Agent", status: "build", statusLabel: "Active build",
+            blurb: "Weekly research across ~50 HR-related sites, scored and turned into consulting leads.",
+            tags: ["Python", "LLM", "Scraping"],
+            categories: ["ai", "tools"],
+            detail: [
+                "Walks a fixed list of HR-related sites weekly, extracts the signals that look like consulting opportunities, and runs them through an LLM for a lead-quality score and a one-line summary. Output is a ranked list of outreach candidates, not a firehose.",
+                "Pairs retrieval with LLM summarization and a quality check that filters noisy or duplicate entries before anything lands in the lead pipeline."
+            ],
+            link: "https://github.com/Smecha10/simplyhr-scraping-tool", linkLabel: "Open the repo"
+        },
+        {
+            id: "agent-windows", title: "CoaPro Windows Agent", status: "build", statusLabel: "In production",
+            blurb: "Rust endpoint agent that intercepts native AI apps and AI-first browsers at the keyboard level.",
+            tags: ["Rust", "Win32", "DPAPI"],
+            categories: ["ai", "tools"],
+            detail: [
+                "The Windows enforcement surface for CoaPro. Keyboard hook plus UI Automation composer read on native AI apps (ChatGPT desktop, Claude desktop), AI-first browsers, AI tabs in regular browsers, and AI CLIs in terminals. Judges send-button clicks locally, blocks the keyboard send when policy says to, and shows an on-screen notice with a presence badge.",
+                "DPAPI-encrypted disk spool for the offline queue, password sign-in with refresh, autostart. Reports to the CoaPro backend. Most active component in the monorepo, 30+ merged PRs."
+            ],
+            link: "https://coapro.org", linkLabel: "Open coapro.org"
+        },
+        {
+            id: "terminal-hub", title: "Terminal Hub", status: "live", statusLabel: "Live",
+            blurb: "Mobile-friendly web UI for persistent tmux-backed terminals. Swipe-to-scroll, on-screen keys.",
+            tags: ["Python", "ttyd", "tmux"],
+            categories: ["tools"],
+            detail: [
+                "Tabbed, mobile-friendly web UI for persistent tmux-backed terminals, built on ttyd plus a small Python front end. Swipe-to-scroll, on-screen keys, and SSH targets so a phone becomes a usable shell.",
+                "Runs on the Pi and serves the rest of the fleet. The reason it exists: I was tired of fighting with mobile SSH clients every time I wanted to check a worker log from the road."
+            ],
+            link: "https://github.com/Smecha10/terminal-hub", linkLabel: "Open the repo"
         }
+    ];
 
-        function renderProjects(filter) {
-            grid.innerHTML = "";
-            projects.forEach(function (p) {
-                if (filter !== "all" && p.categories.indexOf(filter) === -1) return;
-                var card = document.createElement("article");
-                card.className = "project-card";
-                card.tabIndex = 0;
-                card.dataset.id = p.id;
-                var stClass = p.status === "live" ? "status-live"
-                            : p.status === "personal" ? "status-personal"
-                            : "status-build";
-                var tags = p.tags.map(function (t) { return '<span class="tag">' + esc(t) + '</span>'; }).join("");
-                card.innerHTML =
-                    '<div class="project-top">' +
-                        '<span class="project-icon" aria-hidden="true">' + p.icon + '</span>' +
-                        '<span class="' + stClass + ' status-dot">' + esc(p.statusLabel) + '</span>' +
-                    '</div>' +
-                    '<div class="project-body">' +
-                        '<h3>' + esc(p.title) + '</h3>' +
-                        '<p class="blurb">' + esc(p.blurb) + '</p>' +
-                        '<div class="tag-row">' + tags + '</div>' +
-                    '</div>' +
-                    '<div class="project-foot">' +
-                        '<span class="ph">Click for details</span>' +
-                        '<span aria-hidden="true">→</span>' +
-                    '</div>';
-                function openCard() { openDrawer(p); }
-                card.addEventListener("click", openCard);
-                card.addEventListener("keydown", function (e) {
-                    if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openCard(); }
-                });
-                grid.appendChild(card);
+    var skillGroups = [
+        { label: "Languages & frameworks", items: ["Swift / SwiftUI", "Rust", "TypeScript / Next.js", "Python", "SQL · VBA · R"] },
+        { label: "AI & infrastructure", items: ["Self-hosted LLMs (Ollama)", "LoRA training (SmolLM2, ettin)", "FastAPI · Supabase", "Tailscale", "API integration"] },
+        { label: "HR & operations", items: ["HRIS & process design", "Handbook + comp design", "Recruiting (LinkedIn Recruiter)"] },
+        { label: "Languages I speak", items: ["English", "Spanish (fluent)"] }
+    ];
+
+    var grid = document.getElementById("projectGrid");
+    var drawer = document.getElementById("drawer");
+    var overlay = document.getElementById("drawerOverlay");
+    var drawerTitle = document.getElementById("drawerTitle");
+    var drawerBody = document.getElementById("drawerBody");
+    var drawerActions = document.getElementById("drawerActions");
+    var menuToggle = document.getElementById("menuToggle");
+    var menuLabel = document.getElementById("menuLabel");
+    var navPanel = document.getElementById("navPanel");
+
+    function esc(s) { var d = document.createElement("div"); d.textContent = s; return d.innerHTML; }
+
+    function renderProjects(filter) {
+        grid.innerHTML = "";
+        projects.forEach(function (p) {
+            if (filter !== "all" && p.categories.indexOf(filter) === -1) return;
+            var card = document.createElement("article");
+            card.className = "project-card";
+            card.tabIndex = 0;
+            card.dataset.id = p.id;
+            var stClass = p.status === "live" ? "status-live"
+                        : p.status === "personal" ? "status-personal"
+                        : "status-build";
+            var tags = p.tags.map(function (t) { return '<span class="tag">' + esc(t) + '</span>'; }).join("");
+            card.innerHTML =
+                '<div class="top">' +
+                    '<h3>' + esc(p.title) + '</h3>' +
+                    '<span class="' + stClass + ' status-dot">' + esc(p.statusLabel) + '</span>' +
+                '</div>' +
+                '<p class="blurb">' + esc(p.blurb) + '</p>' +
+                '<div class="tag-row">' + tags + '</div>' +
+                '<div class="project-foot"><span>Details</span><span aria-hidden="true">→</span></div>';
+            function openCard() { openDrawer(p); }
+            card.addEventListener("click", openCard);
+            card.addEventListener("keydown", function (e) {
+                if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openCard(); }
             });
+            grid.appendChild(card);
+        });
+    }
+
+    function openDrawer(p) {
+        drawerTitle.textContent = p.title;
+        var bullets = p.detail.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("");
+        drawerBody.innerHTML = '<p>' + esc(p.blurb) + '</p><ul>' + bullets + '</ul>';
+        drawerActions.innerHTML = "";
+        if (p.link) {
+            var a = document.createElement("a");
+            a.href = p.link; a.target = "_blank"; a.rel = "noopener";
+            a.className = "btn btn-primary"; a.textContent = p.linkLabel || "Open link";
+            drawerActions.appendChild(a);
         }
+        var closeRow = document.createElement("button");
+        closeRow.type = "button"; closeRow.className = "btn btn-ghost";
+        closeRow.textContent = "Close";
+        closeRow.addEventListener("click", closeDrawer);
+        drawerActions.appendChild(closeRow);
+        drawer.classList.add("open");
+        overlay.classList.add("open");
+        drawer.setAttribute("aria-hidden", "false");
+        overlay.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+    }
 
-        function openDrawer(p) {
-            drawerTitle.textContent = p.title;
-            var bullets = p.detail.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("");
-            drawerBody.innerHTML = '<p>' + esc(p.blurb) + '</p><ul>' + bullets + '</ul>';
-            drawerActions.innerHTML = "";
-            if (p.link) {
-                var a = document.createElement("a");
-                a.href = p.link;
-                a.target = "_blank";
-                a.rel = "noopener";
-                a.className = "btn btn-primary";
-                a.textContent = p.linkLabel || "Open link";
-                drawerActions.appendChild(a);
-            }
-            var closeRow = document.createElement("button");
-            closeRow.type = "button";
-            closeRow.className = "btn btn-ghost";
-            closeRow.textContent = "Close";
-            closeRow.addEventListener("click", closeDrawer);
-            drawerActions.appendChild(closeRow);
-            drawer.classList.add("open");
-            overlay.classList.add("open");
-            drawer.setAttribute("aria-hidden", "false");
-            overlay.setAttribute("aria-hidden", "false");
-            document.body.style.overflow = "hidden";
-        }
+    function closeDrawer() {
+        drawer.classList.remove("open");
+        overlay.classList.remove("open");
+        drawer.setAttribute("aria-hidden", "true");
+        overlay.setAttribute("aria-hidden", "true");
+        document.body.style.overflow = "";
+    }
 
-        function closeDrawer() {
-            drawer.classList.remove("open");
-            overlay.classList.remove("open");
-            drawer.setAttribute("aria-hidden", "true");
-            overlay.setAttribute("aria-hidden", "true");
-            document.body.style.overflow = "";
-        }
+    document.getElementById("drawerClose").addEventListener("click", closeDrawer);
+    overlay.addEventListener("click", closeDrawer);
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeDrawer(); });
 
-        document.getElementById("drawerClose").addEventListener("click", closeDrawer);
-        overlay.addEventListener("click", closeDrawer);
-        document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeDrawer(); });
-
-        document.querySelectorAll(".filter-btn").forEach(function (btn) {
-            btn.addEventListener("click", function () {
-                document.querySelectorAll(".filter-btn").forEach(function (b) {
-                    b.classList.remove("active");
-                    b.setAttribute("aria-selected", "false");
-                });
-                btn.classList.add("active");
-                btn.setAttribute("aria-selected", "true");
-                renderProjects(btn.dataset.filter);
+    document.querySelectorAll(".filter-btn").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+            document.querySelectorAll(".filter-btn").forEach(function (b) {
+                b.classList.remove("active");
+                b.setAttribute("aria-selected", "false");
             });
+            btn.classList.add("active");
+            btn.setAttribute("aria-selected", "true");
+            renderProjects(btn.dataset.filter);
         });
-        renderProjects("all");
+    });
+    renderProjects("all");
 
-        var chipHost = document.getElementById("skillChips");
-        skills.forEach(function (s) {
-            var el = document.createElement("span");
-            el.className = "skill-chip";
-            el.textContent = s;
-            chipHost.appendChild(el);
+    var skillHost = document.getElementById("skillGroups");
+    skillGroups.forEach(function (g) {
+        var group = document.createElement("div");
+        group.className = "skill-group";
+        var lbl = document.createElement("p");
+        lbl.className = "lbl";
+        lbl.textContent = g.label;
+        group.appendChild(lbl);
+        var list = document.createElement("div");
+        list.className = "skill-list";
+        g.items.forEach(function (s) {
+            var pill = document.createElement("span");
+            pill.className = "skill-pill";
+            pill.textContent = s;
+            list.appendChild(pill);
         });
+        group.appendChild(list);
+        skillHost.appendChild(group);
+    });
 
-        var reveals = document.querySelectorAll(".reveal");
-        if ("IntersectionObserver" in window) {
-            var io = new IntersectionObserver(function (entries) {
-                entries.forEach(function (en) { if (en.isIntersecting) en.target.classList.add("visible"); });
-            }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
-            reveals.forEach(function (el) { io.observe(el); });
-        } else {
-            reveals.forEach(function (el) { el.classList.add("visible"); });
-        }
+    var reveals = document.querySelectorAll(".reveal");
+    if ("IntersectionObserver" in window) {
+        var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (en) { if (en.isIntersecting) en.target.classList.add("visible"); });
+        }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+        reveals.forEach(function (el) { io.observe(el); });
+    } else {
+        reveals.forEach(function (el) { el.classList.add("visible"); });
+    }
 
-        document.querySelectorAll(".copy-btn").forEach(function (btn) {
-            btn.addEventListener("click", function () {
-                var t = btn.getAttribute("data-copy");
-                if (navigator.clipboard && navigator.clipboard.writeText) {
-                    navigator.clipboard.writeText(t).then(function () {
-                        var prev = btn.textContent;
-                        btn.textContent = "Copied";
-                        setTimeout(function () { btn.textContent = prev; }, 1600);
-                    });
-                }
-            });
+    menuToggle.addEventListener("click", function () {
+        var open = navPanel.classList.toggle("open");
+        menuToggle.setAttribute("aria-expanded", open ? "true" : "false");
+        if (menuLabel) menuLabel.textContent = open ? "Close" : "Menu";
+    });
+    navPanel.querySelectorAll("a").forEach(function (a) {
+        a.addEventListener("click", function () {
+            navPanel.classList.remove("open");
+            menuToggle.setAttribute("aria-expanded", "false");
+            if (menuLabel) menuLabel.textContent = "Menu";
         });
+    });
 
-        document.getElementById("saveVcard").addEventListener("click", function (e) {
-            e.preventDefault();
-            window.location.href = "spencer-mecham.vcf";
-        });
-        var saveVcardHero = document.getElementById("saveVcardHero");
-        if (saveVcardHero) {
-            saveVcardHero.addEventListener("click", function (e) {
+    document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+        var id = a.getAttribute("href");
+        if (id.length > 1 && document.querySelector(id)) {
+            a.addEventListener("click", function (e) {
                 e.preventDefault();
-                window.location.href = "spencer-mecham.vcf";
+                var target = document.querySelector(id);
+                var y = target.getBoundingClientRect().top + window.scrollY - 64;
+                window.scrollTo({ top: y, behavior: "smooth" });
             });
         }
-
-        menuToggle.addEventListener("click", function () {
-            var open = navLinks.classList.toggle("open");
-            menuToggle.setAttribute("aria-expanded", open ? "true" : "false");
-        });
-        navLinks.querySelectorAll("a").forEach(function (a) {
-            a.addEventListener("click", function () {
-                navLinks.classList.remove("open");
-                menuToggle.setAttribute("aria-expanded", "false");
-            });
-        });
-
-        document.querySelectorAll('a[href^="#"]').forEach(function (a) {
-            var id = a.getAttribute("href");
-            if (id.length > 1 && document.querySelector(id)) {
-                a.addEventListener("click", function (e) {
-                    e.preventDefault();
-                    var target = document.querySelector(id);
-                    var y = target.getBoundingClientRect().top + window.scrollY - 80;
-                    window.scrollTo({ top: y, behavior: "smooth" });
-                });
-            }
-        });
-    })();
-    </script>
+    });
+})();
+</script>
 </body>
 </html>
