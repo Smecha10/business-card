@@ -434,7 +434,7 @@
     <h1>I run <span class="accent">people ops</span> at SimplyHR, co-founded <span class="accent">CoaPro</span>, and ship iPhone apps on the side.</h1>
     <p class="hero-lead">HR by trade, builder by night. Fractional people-ops work for trades-heavy small businesses, an AI-coaching product for the workplace, and SwiftUI when there's a problem worth solving. I also do lead sourcing and affiliate outreach for NCTPF, a non-profit.</p>
     <div class="cta-row">
-        <a class="btn btn-primary" href="spencer-mecham.vcf" download id="saveVcardHero">Save my contact</a>
+        <button type="button" class="btn btn-primary" id="saveVcardHero">Save my contact</button>
         <a class="btn btn-ghost" href="https://www.linkedin.com/in/spencer-mecham-shrm-cp-4630652aa" target="_blank" rel="noopener">Add me on LinkedIn</a>
     </div>
     <a class="email-link" href="mailto:spencer@simplyhrconsulting.com">or email me →</a>
@@ -621,7 +621,7 @@
         <div class="contact-item"><span class="lbl">LinkedIn</span><a href="https://www.linkedin.com/in/spencer-mecham-shrm-cp-4630652aa" target="_blank" rel="noopener">linkedin.com/in/spencer-mecham-shrm-cp-4630652aa</a></div>
         <div class="contact-item"><span class="lbl">GitHub</span><a href="https://github.com/Smecha10" target="_blank" rel="noopener">github.com/Smecha10</a></div>
         <div class="contact-item"><span class="lbl">CoaPro</span><a href="https://coapro.org" target="_blank" rel="noopener">coapro.org</a></div>
-        <div class="contact-item vcard"><span class="lbl">vCard</span><a href="spencer-mecham.vcf" download>Download contact file</a></div>
+        <div class="contact-item vcard"><span class="lbl">vCard</span><a href="#" id="saveVcardContact">Download contact file</a></div>
     </div>
 </section>
 
@@ -751,6 +751,64 @@
     var menuToggle = document.getElementById("menuToggle");
     var menuLabel = document.getElementById("menuLabel");
     var navPanel = document.getElementById("navPanel");
+
+    // ----- vCard save: fetch as Blob, trigger a download with the right MIME.
+    // On iOS Safari this opens the native "Add to Contacts" picker; on Android
+    // Chrome it triggers the system contact import; on desktop it's a download.
+    function saveVcard(filename) {
+        var fallback = function () {
+            try { window.open("spencer-mecham.vcf", "_blank"); } catch (_) {}
+        };
+        if (!window.fetch) { fallback(); return; }
+        fetch("spencer-mecham.vcf", { cache: "no-store" })
+            .then(function (r) { if (!r.ok) throw new Error("vcf fetch failed"); return r.blob(); })
+            .then(function (blob) {
+                var blobUrl = URL.createObjectURL(new Blob([blob], { type: "text/vcard;charset=utf-8" }));
+                var a = document.createElement("a");
+                a.href = blobUrl;
+                a.download = filename || "Spencer Mecham.vcf";
+                a.rel = "noopener";
+                a.style.display = "none";
+                document.body.appendChild(a);
+                a.click();
+                setTimeout(function () {
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(blobUrl);
+                }, 1000);
+                // Belt-and-suspenders for iOS: if the click was ignored, the
+                // user is still on this page, so open the .vcf in a new tab.
+                setTimeout(function () {
+                    if (document.visibilityState === "visible") fallback();
+                }, 1200);
+            })
+            .catch(fallback);
+    }
+    var saveVcardHero = document.getElementById("saveVcardHero");
+    if (saveVcardHero) {
+        saveVcardHero.addEventListener("click", function (e) {
+            e.preventDefault();
+            flashButton(saveVcardHero, "Adding…");
+            saveVcard("Spencer Mecham.vcf");
+        });
+    }
+    var saveVcardContact = document.getElementById("saveVcardContact");
+    if (saveVcardContact) {
+        saveVcardContact.addEventListener("click", function (e) {
+            e.preventDefault();
+            flashButton(saveVcardContact, "Adding…");
+            saveVcard("Spencer Mecham.vcf");
+        });
+    }
+
+    function flashButton(btn, msg) {
+        var prev = btn.textContent;
+        btn.textContent = msg;
+        btn.disabled = true;
+        setTimeout(function () {
+            btn.textContent = prev;
+            btn.disabled = false;
+        }, 1400);
+    }
 
     function esc(s) { var d = document.createElement("div"); d.textContent = s; return d.innerHTML; }
 
