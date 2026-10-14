@@ -168,6 +168,13 @@
         }
         @media (max-width: 480px) { .hero-lead { font-size: 0.95rem; } }
         .hero-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
+        .hero-actions-secondary { margin-top: -10px; margin-bottom: 22px; }
+        .btn-link {
+            font-family: var(--font-head); font-weight: 600; font-size: 13.5px;
+            color: var(--muted); text-decoration: none; padding: 6px 2px;
+            border-bottom: 1px solid transparent; transition: color .15s, border-color .15s;
+        }
+        .btn-link:hover { color: var(--blue); border-bottom-color: var(--blue); }
         .btn {
             display: inline-flex; align-items: center; gap: 8px;
             font-family: var(--font-head); font-weight: 600; font-size: 14px;
@@ -513,8 +520,11 @@
                     HR by trade, builder by night. Fractional people-ops work for small businesses, an AI-coaching product for the workplace, and SwiftUI when there's a problem worth solving. I also do lead sourcing and affiliate outreach for NCTPF, a non-profit.
                 </p>
                 <div class="hero-actions">
-                    <a class="btn btn-primary" href="#projects">See the work</a>
-                    <a class="btn btn-ghost" href="mailto:spencer@simplyhrconsulting.com">Email me</a>
+                    <a class="btn btn-primary" href="#" id="saveVcardHero" aria-label="Save Spencer Mecham's contact as a vCard">Save my contact</a>
+                    <a class="btn btn-ghost" href="https://www.linkedin.com/in/spencer-mecham-4630652aa" target="_blank" rel="noopener" aria-label="Open Spencer Mecham's LinkedIn profile in a new tab">Add me on LinkedIn</a>
+                </div>
+                <div class="hero-actions hero-actions-secondary">
+                    <a class="btn-link" href="mailto:spencer@simplyhrconsulting.com">or email me</a>
                 </div>
                 <div class="chips" aria-label="What I'm working on">
                     <span class="chip">SimplyHR Consulting</span>
@@ -1107,6 +1117,13 @@
             e.preventDefault();
             window.location.href = "spencer-mecham.vcf";
         });
+        var saveVcardHero = document.getElementById("saveVcardHero");
+        if (saveVcardHero) {
+            saveVcardHero.addEventListener("click", function (e) {
+                e.preventDefault();
+                window.location.href = "spencer-mecham.vcf";
+            });
+        }
 
         menuToggle.addEventListener("click", function () {
             var open = navLinks.classList.toggle("open");
