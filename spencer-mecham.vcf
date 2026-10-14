@@ -2,11 +2,14 @@ BEGIN:VCARD
 VERSION:3.0
 N:Mecham;Spencer;G.;;
 FN:Spencer G. Mecham
-TITLE:People Operations Consultant
+TITLE:People Operations Consultant · CoaPro Co-founder
 ORG:SimplyHR Consulting
 TEL;TYPE=CELL:+15053667437
 EMAIL;TYPE=INTERNET,WORK:spencer@simplyhrconsulting.com
 URL:https://smecha10.github.io/business-card
-ADR;TYPE=WORK:;;Provo, UT;;;;
-NOTE:People Operations Consultant at SimplyHR Consulting specializing in HR automation and AI-powered people strategy.
+URL;TYPE=Coapro:https://coapro.org
+URL;TYPE=Linkedin:https://www.linkedin.com/in/spencer-mecham-4630652aa
+URL;TYPE=Github:https://github.com/Smecha10
+ADR;TYPE=WORK:;;Provo, UT;;;;USA
+NOTE:People Operations Consultant at SimplyHR Consulting. Co-founder of CoaPro, an AI-coaching and policy enforcement product for the workplace.
 END:VCARD
