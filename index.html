@@ -110,8 +110,50 @@
         .nav-panel a:last-child { border-bottom: none; color: var(--blue); }
 
         /* ----- Hero ----- */
-        .hero { padding: 28px 0 24px; }
-        @media (min-width: 760px) { .hero { padding: 56px 0 48px; } }
+        .hero {
+            padding: 28px 0 24px;
+            display: grid; grid-template-columns: 1fr; gap: 24px;
+        }
+        @media (min-width: 760px) {
+            .hero { padding: 56px 0 48px; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: center; }
+        }
+
+        /* Byline: small headshot + name+role strip, visible at the top of the
+           hero on phone. Sits inline so it doesn't push the h1 off screen. */
+        .byline { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+        .byline-photo {
+            width: 44px; height: 44px; border-radius: 50%;
+            object-fit: cover; border: 2px solid #fff;
+            box-shadow: 0 0 0 1px var(--line-2), 0 2px 6px rgba(10,37,64,.10);
+            flex-shrink: 0;
+        }
+        .byline-meta { display: flex; flex-direction: column; min-width: 0; }
+        .byline-name { font-family: var(--font-head); font-weight: 700; font-size: 14px; color: var(--navy); }
+        .byline-role { font-size: 12.5px; color: var(--muted); }
+        @media (min-width: 760px) { .byline { display: none; } }
+
+        /* Profile card: only shown on desktop, sits in the right column of the
+           hero. Hidden on phone because the byline already carries the photo. */
+        .profile-card { display: none; }
+        @media (min-width: 760px) {
+            .profile-card {
+                display: block; max-width: 320px; margin: 0 auto;
+                padding: 24px; text-align: center;
+                background: var(--surface);
+                border: 1px solid var(--line); border-radius: var(--r-xl);
+                box-shadow: var(--sh);
+            }
+            .profile-photo {
+                width: 120px; height: 120px; border-radius: 50%;
+                object-fit: cover; border: 4px solid #fff;
+                box-shadow: 0 0 0 1px var(--line-2), 0 8px 24px rgba(10,37,64,.15);
+                margin: 0 auto 14px;
+            }
+            .profile-card h2 { font-size: 18px; margin-bottom: 4px; }
+            .profile-card .role { font-size: 12.5px; color: var(--muted); margin-bottom: 14px; }
+            .profile-strip { font-size: 12.5px; }
+        }
+
         .hero h1 {
             font-size: 1.65rem; line-height: 1.18; color: var(--navy);
             margin-bottom: 12px; letter-spacing: -0.02em;
@@ -155,6 +197,7 @@
             margin-top: 4px;
         }
         .meta-strip strong { color: var(--text-2); font-weight: 600; }
+        @media (min-width: 760px) { .meta-strip-hero { display: none; } }
 
         /* ----- Sections ----- */
         section { padding: 36px 0; border-top: 1px solid var(--line); }
@@ -431,18 +474,37 @@
 <div class="wrap">
 
 <section class="hero">
-    <h1>I run <span class="accent">people ops</span> at SimplyHR, co-founded <span class="accent">CoaPro</span>, and ship iPhone apps on the side.</h1>
+    <div class="hero-text">
+        <div class="byline">
+            <img class="byline-photo" src="Spencer%20Head%20Shot.jpg" alt="Spencer G. Mecham" width="40" height="40" onerror="this.style.display='none'">
+            <div class="byline-meta">
+                <span class="byline-name">Spencer G. Mecham</span>
+                <span class="byline-role">People Operations Consultant · CoaPro Co-founder · Provo, UT</span>
+            </div>
+        </div>
+        <h1>I run <span class="accent">people ops</span> at SimplyHR, co-founded <span class="accent">CoaPro</span>, and ship iPhone apps on the side.</h1>
     <p class="hero-lead">HR by trade, builder by night. Fractional people-ops work for trades-heavy small businesses, an AI-coaching product for the workplace, and SwiftUI when there's a problem worth solving. I also do lead sourcing and affiliate outreach for NCTPF, a non-profit.</p>
     <div class="cta-row">
         <button type="button" class="btn btn-primary" id="saveVcardHero">Add me to contacts</button>
         <a class="btn btn-ghost" href="https://www.linkedin.com/in/spencer-mecham-shrm-cp-4630652aa" target="_blank" rel="noopener">Connect on LinkedIn</a>
     </div>
     <a class="email-link" href="mailto:spencer@simplyhrconsulting.com">or email me →</a>
-    <div class="meta-strip">
+    <div class="meta-strip meta-strip-hero">
         <span><strong>Provo, UT</strong></span>
         <span><strong>BYU</strong> · HR Mgmt</span>
         <span><strong>CoaPro</strong> · Live</span>
     </div>
+    </div>
+    <aside class="profile-card" aria-label="Profile">
+        <img class="profile-photo" src="Spencer%20Head%20Shot.jpg" alt="Spencer G. Mecham" width="120" height="120" onerror="this.style.display='none'">
+        <h2>Spencer G. Mecham</h2>
+        <p class="role">People Operations Consultant · CoaPro Co-founder</p>
+        <div class="meta-strip profile-strip">
+            <span><strong>Provo, UT</strong></span>
+            <span><strong>BYU</strong> · HR Mgmt</span>
+            <span><strong>CoaPro</strong> · Live</span>
+        </div>
+    </aside>
 </section>
 
 <section id="now" class="reveal">
